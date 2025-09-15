@@ -1,18 +1,18 @@
-import random
+import random                                                                                                   #import random library
 
-user_name = input("What is your name?")
+user_name = input("What is your name?")                                                                         #ask user what their name is
 
-def reverse_and_display(user_name):
+def reverse_and_display(user_name):                                                                             #define reverse and display function with user_name as an argument
     '''
-    Takes in name and then prints it backwards
+    Takes in name and then prints it backwards                                                                  
     Args:
         user_name (string): any given word
     Returns:
         print: The name backwards
     '''
-    return(user_name[::-1])
+    return(user_name[::-1])                                                                                     #return to the function the user's name backwards
 
-def count_vowels(user_name):
+def count_vowels(user_name):                                                                                    #define count vowels function with user_name as an argument
     '''
     Takes in a name and then prints the number of vowels in it
     Args:
@@ -20,15 +20,15 @@ def count_vowels(user_name):
     Returns:
         print: The number of vowels in the name
     '''
-    vowel_list = ["a", "e", "i", "o", "u"]
-    count = 0
+    vowel_list = ["a", "e", "i", "o", "u"]                                                                      #create a list of vowels
+    count = 0                                                                                                   #set vowel count to 0
 
-    for letter in user_name:
-        if letter in vowel_list:
-            count += 1
-    return(count)
+    for letter in user_name:                                                                                    #for loop
+        if letter in vowel_list:                                                                                #if a letter in the user's name matches a letter in the vowel list
+            count += 1                                                                                          #add one to the vowel count
+    return(count)                                                                                               #return the vowel count
 
-def consonant_frequency(user_name):
+def consonant_frequency(user_name):                                                                             #create consonant frequency function with user_name as an argument
     '''
     takes in a name and then prints the number of consonants in it
     Args:
@@ -36,15 +36,15 @@ def consonant_frequency(user_name):
     Returns:
         print: number of consonants in name
         '''
-    consonant_list = ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z"]
-    consonant_count = 0
+    consonant_list = ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z"] #list of all consonants
+    consonant_count = 0                                                                                         #set consonant count to 0
 
-    for letter in user_name:
-        if letter in consonant_list:
-            consonant_count+= 1
-    return(consonant_count)
+    for letter in user_name:                                                                                    #for loop
+        if letter in consonant_list:                                                                            #if a letter in the user's name matches a letter in the consonant count
+            consonant_count+= 1                                                                                 #add one to the consonant count
+    return(consonant_count)                                                                                     #retur the consonant count to the function
 
-def first_name(user_name):
+def first_name(user_name):                                                                                      #define first name function with user_name as an argument
     '''
     gives user only first name
     Args:
@@ -52,17 +52,17 @@ def first_name(user_name):
     Returns:
         First name of user
     '''
-    space = 0
-    for i in range(len(user_name)):
-        if user_name[i] == " ":
-            break
-        else: 
-            space = space +1
-    first = user_name[: space]
-    return first
+    space = 0                                                                                                   #define the space (index of space) as 0
+    for i in range(len(user_name)):                                                                             #for loop (for every character in the length of the user's name)
+        if user_name[i] == " ":                                                                                 #if a character is  a space
+            break                                                                                               #end for loop
+        else:                                                                                                   #otherwise
+            space = space +1                                                                                    #add one to the space (index of space) count
+    first = user_name[: space]                                                                                  #define the variable "first" as the user name until the first space (aka the user's first name)
+    return first                                                                                                #return the user's first name to the function
                    
 
-def middle_name(user_name):
+def middle_name(user_name):                                                                                     #define the middle name(s) function with user_name as an argument
     '''
     prints user's middle name(s)
     Args:
@@ -70,26 +70,26 @@ def middle_name(user_name):
     Returns:
         the user's middle name(s)
     '''
-    lastspace = len(user_name)-1
-    for i in range(len(user_name)-1, -1, -1):
-        if user_name[i] == " ":
-            break
-        else: 
-            lastspace = lastspace -1
+    lastspace = len(user_name)-1                                                                                #define variable "lastspace" as the length of the user's name
+    for i in range(len(user_name)-1, -1, -1):                                                                   #for loop (for every character in the length of the user's name going from the last character to first)
+        if user_name[i] == " ":                                                                                 #if a character is a space
+            break                                                                                               #end for loop
+        else:                                                                                                   #otherwise
+            lastspace = lastspace -1                                                                            #subtract one from the index of the lastspace
 
-    firstspace = 0
-    for i in range(0,len(user_name)):
+    firstspace = 0                                                                                              #set firstspace counter (index of the first space in the user's name) to 0
+    for i in range(0,len(user_name)):                                                                           #for loop (for every character in the length of the user's name)
         
-        if user_name[i] == " ":
-            firstspace = firstspace+1
-            break
-        else: 
-            firstspace = firstspace +1
+        if user_name[i] == " ":                                                                                 #if a character is a space
+            firstspace = firstspace+1                                                                           #add one to the index of the first space 
+            break                                                                                               #end for loop
+        else:                                                                                                   #otherwise
+            firstspace = firstspace +1                                                                          #add one to the firstspace counter
 
-    middle = user_name[firstspace:lastspace]
-    return middle
+    middle = user_name[firstspace:lastspace]                                                                    #define variable "middle" as the characters between the first and last space (the user's middle name(s))
+    return middle                                                                                               #return the user's middle name to the function
 
-def last_name(user_name):
+def last_name(user_name):                                                                                       #define the last_name function with user_name as an argument
     '''
     prints user's last name
     Args:
@@ -98,16 +98,16 @@ def last_name(user_name):
         the user's last name
     '''
   
-    finalspace = len(user_name)-1
-    for i in range(len(user_name)-1, -1, -1):
-        if user_name[i] == " ":
-            finalspace = finalspace +1
-            break
-        else: 
-            finalspace = finalspace -1
-    return user_name[finalspace :]
+    finalspace = len(user_name)-1                                                                               #define the variable "finalspace" as the length of the user's name starting from the last character and ending at the first character
+    for i in range(len(user_name)-1, -1, -1):                                                                   #for loop (for every character in the length of the user's name going backwards)
+        if user_name[i] == " ":                                                                                 #if a character in the user's name is a space
+            finalspace = finalspace +1                                                                          #add one to the finalspace counter
+            break                                                                                               #end for loop
+        else:                                                                                                   #otherwise
+            finalspace = finalspace -1                                                                          #subtract one from the finalspace counter
+    return user_name[finalspace :]                                                                              #return the user's name from the last space to the end of their name (aka their last name)
 
-def hyphen(user_name):
+def hyphen(user_name):                                                                                          #define the hyphen function with user_name as an argument
     '''
     Defines if there is a hyphen in the name or not
     Args:
@@ -115,27 +115,52 @@ def hyphen(user_name):
     Returns:
         A boolean value whether or not a hyphen is detected
     '''
-    if "-" in user_name:
-        return True
-    else:
-        return False 
+    if "-" in user_name:                                                                                        #if there is a hyphen in the user's name                                                                                                                                                                                    
+        return True                                                                                             #return a true boolean value
+    else:                                                                                                       #otherwise
+        return False                                                                                            #return a false boolean value
 
 
-def convert_upper(user_name):
-    output = ""
-    for char in user_name:
-        num = ord(char)
-    if 97 < num < 122:
-        converted_num = ord(char) - 32
-        for i in range(user_name):
-            output += converted_num
-            print(output)
-    #elif 65 < num < 90:
+def convert_upper(user_name):                                                                                   #define convert_upper function with user_name as an argument
+    '''
+    converts user's entire name to uppercase
+    Args:
+        user_name (string): any given word
+    Returns:
+        the user's name in uppercase
+    '''                                                                                  
+    output = ""                                                                                                 #define the variable "output" as an empty string
+    for char in user_name:                                                                                      #for loop (for every character in the user's name)
+        num = ord(char)                                                                                         #create variable "num" defined as the ordinal variable for every character in the user's name
+        if num >= 97 and num <= 122:                                                                            #if the ordinal value is greater than 97 and less than 122 (if the number is lowercase)
+            converted_num = ord(char) - 32                                                                      #create variable "converted_num" and define it as the ordinal value of the character - 32 (newly defines the number as its uppercase counterpart)
+            output = output + chr(converted_num)                                                                #convert the character's new ordinal value back into its character and add it to "output"
+        else:                                                                                                   #otherwise (if the character is uppercase already)
+            output = output + char                                                                              #add the character straight to the output
+    return output                                                                                               #return the output (the user's name in all uppercase)
+
+ 
+def convert_lower(user_name):                                                                                   #define convert_lower as a function with user_name as an argument
+    '''
+    converts user's entire name to lowercase
+    Args:
+        user_name (string): any given word
+    Returns:
+        the user's name in all lowercase
+    '''                                                                                  
+    output = ""                                                                                                 #define the variable "output" as an empty string
+    for char in user_name:                                                                                      #for loop (for every character in the user's name)
+        num = ord(char)                                                                                         #create variable "num" defined as the ordinal variable for every character in the user's name                                                                                                                  
+        if num >= 65 and num <= 90:                                                                             #if the ordinal value is greater than 65 and less than 90 (if the number is uppercase)
+            converted_num = ord(char) + 32                                                                      #create variable "converted_num" and define it as the ordinal value of the character + 32 (newly defines the number as its lowercase counterpart)
+            output = output + chr(converted_num)                                                                #convert the character's new ordinal value back into its character and add it to "output"
+        else:                                                                                                   #otherwise (if the character is already lowercase)
+            output = output + char                                                                              #add the character straight to the output
+    return output                                                                                               #return the output (the user's name in all lowercase)
+
         
 
-        
-
-def scramble_name(user_name):
+def scramble_name(user_name):                                                                                   #define the scramble_name function with user_name as an argument
     '''
     Scrambles letters in user's name
     Args:
@@ -143,14 +168,14 @@ def scramble_name(user_name):
     Returns:
         the user's name randomly scrambled
     '''
-    char_list = list(user_name)
-    random.shuffle(char_list)
-    new_word = ""
-    for char in char_list:
-        new_word += char
-    return new_word
+    char_list = list(user_name)                                                                                 #create the "char_list" variable and define it as all of the characters in the user's name converted to a list
+    random.shuffle(char_list)                                                                                   #randomly shuffle the character list
+    new_word = ""                                                                                               #create the variable "new_word" and define it as an empty string
+    for char in char_list:                                                                                      #for loop (for every character in the character list)
+        new_word += char                                                                                        #add every character in the character list to the new word string
+    return new_word                                                                                             #return the scrambled user's name (new_word)
 
-def palindrome(user_name):
+def palindrome(user_name):                                                                                      #define the palindrome function with user_name as an argument
     '''
     Confirms if a name is a palindrome or not
     Args:
@@ -158,12 +183,19 @@ def palindrome(user_name):
     Returns:
         A boolean value
     '''
-    if user_name == user_name[: : -1]:
-        return True
-    else:
-        return False
+    if user_name == user_name[: : -1]:                                                                          #if the user name printed forwards is the same as the username printed backwards
+        return True                                                                                             #return a true boolean value
+    else:                                                                                                       #otherwise
+        return False                                                                                            #return a false boolean value
 
-def main():
+
+def get_initials(first, last):
+    firstinitialindex = list(first)
+    lastinitialindex = list(last)
+    return (firstinitialindex[0], lastinitialindex[0])
+
+
+def main():                                                                                                     #define main function (where every function is called and executed)
     while True:
         choice = input("what would you like to do with your name? (insert number) 1. print name backwards 2. count vowels 3. count consonants 4. return first name 5. return last name 6. return middle name(s) 7. identify if there is a hyphen in your name 8. make name lowercase 9. make name uppercase 10. scramble letters in name 11. identify if name is a palindrome: ")
         if choice == "1":
@@ -180,28 +212,21 @@ def main():
             print(middle_name(user_name))
         elif choice == "7":
             print(hyphen(user_name))
-        #elif choice == "8":
-            #print(convert_lower(user_name))
+        elif choice == "8":
+            print(convert_lower(user_name))
         elif choice == "9":
             print(convert_upper(user_name))
         elif choice == "10":
             print(scramble_name(user_name))
         elif choice == "11":
             print(palindrome(user_name))
+        elif choice == "12":
+            print(get_initials(first_name(user_name), last_name(user_name)))
         else:
             print("invalid response... try again")
 
 
-main()
-
-'''
-
-
-elif choice == "9":
-    convert to upper
-'''
-
-        
+main()        
 
 
         
