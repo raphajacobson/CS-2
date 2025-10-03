@@ -43,7 +43,7 @@ def count_vowels(user_name):                                                    
     vowel_list = ["a", "e", "i", "o", "u"]                                                                      #create a list of vowels
     count = 0                                                                                                   #set vowel count to 0
 
-    for letter in user_name:                                                                                    #for loop
+    for letter in convert_lower(user_name):                                                                                    #for loop
         if letter in vowel_list:                                                                                #if a letter in the user's name matches a letter in the vowel list
             count += 1                                                                                          #add one to the vowel count
     return(count)                                                                                               #return the vowel count
@@ -59,7 +59,7 @@ def consonant_frequency(user_name):                                             
     consonant_list = ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z"] #list of all consonants
     consonant_count = 0                                                                                         #set consonant count to 0
 
-    for letter in user_name:                                                                                    #for loop
+    for letter in convert_lower(user_name):                                                                                    #for loop
         if letter in consonant_list:                                                                            #if a letter in the user's name matches a letter in the consonant count
             consonant_count+= 1                                                                                 #add one to the consonant count
     return(consonant_count)                                                                                     #retur the consonant count to the function
