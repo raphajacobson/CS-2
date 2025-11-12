@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enter the speculations of your package:</title>
+  <script>
+    // This function determines the zones of zip codes
+    function getZip(zip)
+    {
+      if(zip >= 1 && zip <= 6999)
+      {
+        return 1;
+      }
+      else if (zip >= 7000 && zip <= 19999)
+      {
+        return 2;
+      }
+      else if (zip >= 20000 && zip <= 35999)
+      {
+        return 3;
+      }
+      else if (zip >= 36000 && zip <= 62999)
+      {
+        return 4;
+      }
+      else if (zip >= 63000 && zip <= 84999)
+      { 
+       return 5;
+      }
+      else if (zip >= 85000 && zip <= 99999)
+      {
+        return 6;
+      }
+      else 
+      {
+        return "Unmailable";
+      }
+    }
+    
+    function determine_class(num1, num2, num3)
+    //this function defines the class of the package based off of its length, height, and thickness
+    {
+      if (num1 >= 3.5 && num1 <= 4.25 && num2 >= 3.5 && num2 <= 6 && num3 >= .007 && num3 <= .016)
+      {
+        return "regular post card";
+      }
+      else if (num1 > 4.25 && num1 < 6 && num2 > 6 && num2 < 11.5 && num3 >= .007 && num3 <= .015)
+      { 
+        return "large post card";
+      }
+      else if (num1 >= 3.5 && num1 <= 6.125 && num2 >= 5 && num2 <= 11.5 && num3 > .016 && num3 < .25)
+      {
+        return "envelope";
+      }
+      else if (num1 > 6.125 && num1 < 24 && num2 >= 11 && num2 <= 18 && num3 >= .25 && num3 <= .5)
+      {  
+        return "large envelope";
+      }
+      else if (num1 + 2*(num2+num3) <= 84)
+      {
+        return "regular package";
+      }
+      else if ((130 >= (num1 + 2*(num2+num3))) && (num1 + 2*(num2+num3) > 84))
+      {
+        return "large package";
+      }
+      else 
+      {
+        return "Unmailable";
+      }
+      }
+
+  function cost_association(package_type, difference)
+  //this function associates the package's class and zip code with a price in order to determine the final cost
+    {
+      if (package_type == "regular post card")
+      {
+        return .20 + (.03 * parseInt(difference));
+      }
+      else if (package_type == "large post card")
+      {
+        return .37 + (.03 * parseInt(difference));
+      }
+      else if (package_type == "envelope")
+      {
+        return .37 + (.04 * parseInt(difference));
+      }
+      else if (package_type == "large envelope")
+      {
+        return .6 + (.05 * parseInt(difference));
+      }
+      else if (package_type == "regular package")
+      {
+        return 2.95 + (.25 * parseInt(difference));
+      }
+      else if (package_type == "large package")
+      {
+        return 3.95 + (.35 * parseInt(difference));
+      }
+      else 
+      {
+        return "Unmailable";
+      }
+    }
+    function main() 
+    {
+      // Get values from the input fields
+      let num1 = parseFloat(document.getElementById("length").value);
+      let num2 = parseFloat(document.getElementById("height").value);
+      let num3 = parseFloat(document.getElementById("thickness").value);
+      let num4 = parseFloat(document.getElementById("zip_start").value);
+      let num5 = parseFloat(document.getElementById("zip_end").value);
+      
+    
+    // Convert the values to numbers (since inputs are strings by default)
+    difference = Math.abs((parseFloat(getZip(num4))) - parseFloat((getZip(num5))));
+    package_type = determine_class(num1,num2,num3);
+    total_cost = ("Total cost: " + "$" + cost_association(package_type, difference));
+    //remove any 0s at the beginning of the price
+    total_cost = total_cost.replace(/0/g,'') 
+    
+      // Display the result inside the <p> tag
+    if (package_type == "Unmailable" || difference == "Unmailable")
+    {
+        document.getElementById("result").innerText = "Unmailable";
+    }
+    else
+    {
+        document.getElementById("result").innerText = total_cost;
+    }
+    }
+
+  </script>
+</head>
+<body>
+  <h2>Welcome to the GCDS post office</h2>
+
+  <!-- Input fields -->
+    <input type="number" id="length" placeholder="length"><br>
+    <input type="number" id="height" placeholder="height"><br>
+    <input type="number" id="thickness" placeholder="thickness"><br>
+    <input type="number" id="zip_start" placeholder="zip start"><br>
+    <input type="number" id="zip_end" placeholder="zip end"><br>
+<style>
+    input[id="length"] {
+        background-color: rgb(229, 139, 106);
+        border: 1px solid #ccc;
+        color: white;
+        padding: 4px;
+        border-radius: 8px;
+        position: relative;
+        top: 165px;
+        left: 45mm;
+        width: 35mm;
+    }
+    input[id="height"] {
+        background-color: rgb(229, 139, 106);
+        border: 1px solid #ccc;
+        color: white;
+        padding: 4px;
+        border-radius: 8px;
+        position: relative;
+        top: 141px;
+        left: 85mm;
+        width: 35mm;
+    }
+    input[id="thickness"] {
+        background-color: rgb(229, 139, 106);
+        border: 1px solid #ccc;
+        color: white;
+        padding: 4px;
+        border-radius: 8px;
+        position: relative;
+        top: 117px;
+        left: 125mm;
+        width: 35mm;
+    }
+    input[id="zip_start"] {
+        background-color: rgb(229, 139, 106);
+        border: 1px solid #ccc;
+        color: white;
+        padding: 4px;
+        border-radius: 8px;
+        position: relative;
+        top: 92px;
+        left: 165mm;
+        width: 35mm;
+    }
+    input[id="zip_end"] {
+        background-color: rgb(229, 139, 106);
+        border: 1px solid #ccc;
+        color: white;
+        padding: 4px;
+        border-radius: 8px;
+        position: relative;
+        top: 68px;
+        left: 205mm;
+        width: 35mm;
+    }
+    input[id = "result"] {
+        color: rgb(0, 0, 0);
+        position: relative;
+        top: 68px;
+        left: 205mm;
+        width: 35mm;
+    }
+    button1 {
+        background-color: rgb(0, 119, 255);
+        color: white;
+        padding: 10px 24px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        position: relative;
+        top: 88px;
+        left: 109mm;
+    }
+    body {
+        background-image: url(https://cdn.creazilla.com/cliparts/1807229/post-office-clipart-xl.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    h2 {
+        color: rgb(0, 0, 0);
+        font-size: 45pt;
+        text-align: left;
+        text-indent:33mm;
+    }
+
+</style>
+
+  <!-- Button that calls the function -->
+  <button1 onclick="main()">Calculate the price of your package</button1>
+   
+  <!-- displays result -->
+  <p id="result"></p>
+</body>
+</html>
