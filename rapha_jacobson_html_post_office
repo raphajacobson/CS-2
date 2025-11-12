@@ -7,7 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Enter the speculations of your package:</title>
   <script>
-    // This function determines the zones of zip codes
+    //assocates class of package and distance and assigns a cost
+    //Args:
+    //    zip(str): replacement for either zip_start or zip_end (So i dont have to repeat code twice but rather just call the function with zip_start and zip_end later)
+    //Returns:
+    //    the zone of a zip code the user enters or "unmailable" if a zip code is invalid
     function getZip(zip)
     {
       if(zip >= 1 && zip <= 6999)
@@ -42,6 +46,12 @@
     
     function determine_class(num1, num2, num3)
     //this function defines the class of the package based off of its length, height, and thickness
+    //Args:
+    //    length (int): length of package
+    //    height (int): height of package
+    //    thickness (int): thickenss of package
+    //Returns:
+    //    The package type of the package in a string or "unmailable" if there is an invalid length, height, or thickness
     {
       if (num1 >= 3.5 && num1 <= 4.25 && num2 >= 3.5 && num2 <= 6 && num3 >= .007 && num3 <= .016)
       {
@@ -75,6 +85,11 @@
 
   function cost_association(package_type, difference)
   //this function associates the package's class and zip code with a price in order to determine the final cost
+  //Args:
+  //     package_type (string) = class of package defined in determine_class function
+  //     difference (int) = The amount of zones the package will travel through defined in getZip
+  //Returns:
+  //    The price of the package or unmailable if the package_type is not defined
     {
       if (package_type == "regular post card")
       {
@@ -107,22 +122,21 @@
     }
     function main() 
     {
-      // Get values from the input fields
+    // Get values from the input fields and turns them into integers Convert the values to numbers (since inputs are strings by default)
       let num1 = parseFloat(document.getElementById("length").value);
       let num2 = parseFloat(document.getElementById("height").value);
       let num3 = parseFloat(document.getElementById("thickness").value);
-      let num4 = parseFloat(document.getElementById("zip_start").value);
-      let num5 = parseFloat(document.getElementById("zip_end").value);
+      let num4 = (document.getElementById("zip_start").value);
+      let num5 = (document.getElementById("zip_end").value);
       
     
-    // Convert the values to numbers (since inputs are strings by default)
     difference = Math.abs((parseFloat(getZip(num4))) - parseFloat((getZip(num5))));
     package_type = determine_class(num1,num2,num3);
+    console.log(difference);
     total_cost = ("Total cost: " + "$" + cost_association(package_type, difference));
     //remove any 0s at the beginning of the price
     total_cost = total_cost.replace(/0/g,'') 
     
-      // Display the result inside the <p> tag
     if (package_type == "Unmailable" || difference == "Unmailable")
     {
         document.getElementById("result").innerText = "Unmailable";
@@ -138,13 +152,14 @@
 <body>
   <h2>Welcome to the GCDS post office</h2>
 
-  <!-- Input fields -->
+  <!-- puts inputs into names so they are easier to differentiate in my code -->
     <input type="number" id="length" placeholder="length"><br>
     <input type="number" id="height" placeholder="height"><br>
     <input type="number" id="thickness" placeholder="thickness"><br>
     <input type="number" id="zip_start" placeholder="zip start"><br>
     <input type="number" id="zip_end" placeholder="zip end"><br>
 <style>
+    /* formatting for the input length box */
     input[id="length"] {
         background-color: rgb(229, 139, 106);
         border: 1px solid #ccc;
@@ -156,6 +171,7 @@
         left: 45mm;
         width: 35mm;
     }
+    /* formatting for the input height box */
     input[id="height"] {
         background-color: rgb(229, 139, 106);
         border: 1px solid #ccc;
@@ -167,6 +183,7 @@
         left: 85mm;
         width: 35mm;
     }
+    /* formatting for the input thickness box */
     input[id="thickness"] {
         background-color: rgb(229, 139, 106);
         border: 1px solid #ccc;
@@ -178,6 +195,7 @@
         left: 125mm;
         width: 35mm;
     }
+    /* formatting for the zip start length box */
     input[id="zip_start"] {
         background-color: rgb(229, 139, 106);
         border: 1px solid #ccc;
@@ -189,6 +207,7 @@
         left: 165mm;
         width: 35mm;
     }
+    /* formatting for the zip end length box */
     input[id="zip_end"] {
         background-color: rgb(229, 139, 106);
         border: 1px solid #ccc;
@@ -200,13 +219,7 @@
         left: 205mm;
         width: 35mm;
     }
-    input[id = "result"] {
-        color: rgb(0, 0, 0);
-        position: relative;
-        top: 68px;
-        left: 205mm;
-        width: 35mm;
-    }
+    /* formatting for the calculate price button */
     button1 {
         background-color: rgb(0, 119, 255);
         color: white;
@@ -218,12 +231,14 @@
         top: 88px;
         left: 109mm;
     }
+    /* formatting for the background image */
     body {
         background-image: url(https://cdn.creazilla.com/cliparts/1807229/post-office-clipart-xl.png);
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
     }
+    /* formatting for the header of the page */
     h2 {
         color: rgb(0, 0, 0);
         font-size: 45pt;
