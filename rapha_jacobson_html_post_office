@@ -38,9 +38,9 @@
       {
         return 6;
       }
-      else 
+      else (zip_end < 1 || zip_end > 99999)
       {
-        return "Unmailable";
+        return "unmailable"
       }
     }
     
@@ -133,14 +133,17 @@
     difference = Math.abs((parseFloat(getZip(num4))) - parseFloat((getZip(num5))));
     package_type = determine_class(num1,num2,num3);
     console.log(difference);
+    //define total cost as the output of the cost_association function
     total_cost = ("Total cost: " + "$" + cost_association(package_type, difference));
     //remove any 0s at the beginning of the price
     total_cost = total_cost.replace(/0/g,'') 
     
-    if (package_type == "Unmailable" || difference == "Unmailable")
+    //if package measurements or zip codes are not valid, print unmailiable
+    if (package_type == "Unmailable" || getZip(num4, num5) == "unmailable")
     {
         document.getElementById("result").innerText = "Unmailable";
     }
+    //if all package measurements and zip code are valid, print the total cost
     else
     {
         document.getElementById("result").innerText = total_cost;
