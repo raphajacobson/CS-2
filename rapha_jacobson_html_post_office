@@ -132,7 +132,6 @@
     
     difference = Math.abs((parseFloat(getZip(num4))) - parseFloat((getZip(num5))));
     package_type = determine_class(num1,num2,num3);
-    console.log(difference);
     //define total cost as the output of the cost_association function
     total_cost = ("Total cost: " + "$" + cost_association(package_type, difference));
     //remove any 0s at the beginning of the price
