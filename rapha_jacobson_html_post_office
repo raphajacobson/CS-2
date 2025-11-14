@@ -1,3 +1,12 @@
+<!-- rapha_jacobson_html_post_office.py -->
+
+<!-- Description: Runs the post office code on a google chrome platform -->
+
+<!-- Features: takes in length, height, and width of package along with the starting and ending zip code. Returns the total price of the package -->
+
+<!-- Log: 1.0 -->
+
+<!-- Bugs: None found so far -->
 
 <!DOCTYPE html>
 <html lang="en">
