@@ -55,6 +55,13 @@ def survival_by_gender(file):
       print(f"Error {'loadanddisplay.csv'} not found")
 
 def age_analysis(file):
+    for line in file
+        data = line.strip().split(',')
+        age = data[6]
+        avg_age = (age / len(file))
+        print (avg_age)
+
+
 
         
 
