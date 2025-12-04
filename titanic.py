@@ -55,37 +55,42 @@ def survival_by_gender(file):
       print(f"Error {'loadanddisplay.csv'} not found")
 
 def age_analysis(file):
-    age_list = []
-    for line in file:
-        data = line.strip().split(',')
-        try:
-            age_list.append(float(data[6]))
-        except:
-          continue
-    all_ages = sum(age_list)
-    avg_age = all_ages/(len(age_list))
-    print (f"The average age is: {avg_age}")
-    file.seek(1)
-    surv_age = []
-    died_age = []
-    for line in file:
-        data = line.strip().split(',')
-        if data[1] == "1":
+  with open('ageanalysis.csv', 'w') as output:
+      try:
+        age_list = []
+        for line in file:
+            data = line.strip().split(',')
             try:
-                surv_age.append(float(data[6]))
+                age_list.append(float(data[6]))
             except:
-              continue
-        else:
-            try:
-                died_age.append(float(data[6]))
-            except:
-              continue
-    all_surv_ages = sum(surv_age)
-    all_died_ages = sum(died_age)
-    avg_surv_age = all_surv_ages/(len(surv_age))
-    avg_died_age = all_died_ages/(len(died_age))
-    print(f"The average age of all survivors of the titanic is {avg_surv_age}")
-    print(f"The average age of all the non-survivors of the titanic is {avg_died_age}")
+                continue
+        all_ages = sum(age_list)
+        avg_age = all_ages/(len(age_list))
+        output.write(f"The average age is: {avg_age}\n")
+        file.seek(1)
+        surv_age = []
+        died_age = []
+        for line in file:
+            data = line.strip().split(',')
+            if data[1] == "1":
+                try:
+                    surv_age.append(float(data[6]))
+                except:
+                    continue
+            else:
+                try:
+                    died_age.append(float(data[6]))
+                except:
+                    continue
+        all_surv_ages = sum(surv_age)
+        all_died_ages = sum(died_age)
+        avg_surv_age = all_surv_ages/(len(surv_age))
+        avg_died_age = all_died_ages/(len(died_age))
+        output.write(f"The average age of all survivors of the titanic is: {avg_surv_age}\n")
+        output.write(f"The average age of all the non-survivors of the titanic is: {avg_died_age}")
+      except FileExistsError:
+        print(f"Error {'ageanalysis'} not found")
+
 
 
 
@@ -113,13 +118,3 @@ def main():
 
 main()
 
-## for line in file:
- ##           row = line.strip().split(',')
-  ##          #print(row[name_index])
-    ##with open('howmanygirls.csv', 'w') as file:
-      ##  girl_count = 0
-        ##or row in 'ffile':
-           ## if row[5] == "female":
-          ##      girl_count += 1
-            ##    girl_count += 1
-        ##howmanygirls.write("males", "females")
