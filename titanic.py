@@ -1,6 +1,6 @@
 
        
-def read_titanic_data(file):
+def load_and_display(file):
   try:
     with open('loadanddisplay.csv', 'w') as output:
       ten_count = 0
@@ -45,8 +45,8 @@ def survival_by_gender(file):
           f_survive += 1
       m_surv_rate = m_survive / 577 * 100
       f_surv_rate = f_survive / 314 * 100
-      output.write (f"The female survival rate is {f_surv_rate}%")
-      output.write (f"The male survival rate is {m_surv_rate}%")
+      output.write (f"The female survival rate is {f_surv_rate}%\n")
+      output.write (f"The male survival rate is {m_surv_rate}%\n")
       if m_surv_rate > f_surv_rate:
         output.write("Therefore the male survival rate is higher")
       elif f_surv_rate > m_surv_rate:
@@ -55,15 +55,39 @@ def survival_by_gender(file):
       print(f"Error {'loadanddisplay.csv'} not found")
 
 def age_analysis(file):
-    for line in file
+    age_list = []
+    for line in file:
         data = line.strip().split(',')
-        age = data[6]
-        avg_age = (age / len(file))
-        print (avg_age)
+        try:
+            age_list.append(float(data[6]))
+        except:
+          continue
+    all_ages = sum(age_list)
+    avg_age = all_ages/(len(age_list))
+    print (f"The average age is: {avg_age}")
+    file.seek(1)
+    surv_age = []
+    died_age = []
+    for line in file:
+        data = line.strip().split(',')
+        if data[1] == "1":
+            try:
+                surv_age.append(float(data[6]))
+            except:
+              continue
+        else:
+            try:
+                died_age.append(float(data[6]))
+            except:
+              continue
+    all_surv_ages = sum(surv_age)
+    all_died_ages = sum(died_age)
+    avg_surv_age = all_surv_ages/(len(surv_age))
+    avg_died_age = all_died_ages/(len(died_age))
+    print(f"The average age of all survivors of the titanic is {avg_surv_age}")
+    print(f"The average age of all the non-survivors of the titanic is {avg_died_age}")
 
 
-
-        
 
 
 def main():
@@ -73,7 +97,7 @@ def main():
       #name_index = header.index('Name')  # Find the index of 'Name' column
       data = open("titanic.csv")
 
-      read_titanic_data(file)
+      load_and_display(file)
       file.seek(1)
       survival_rate(file)
       file.seek(1)
