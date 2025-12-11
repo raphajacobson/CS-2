@@ -115,28 +115,43 @@ def class_based_analysis(file):
           c1 += 1
           if data[1] == "1":
             firstc_surv += 1
-          fare_fc.append(data[10])
+          fare_fc.append(float(data[10]))
         elif data[2] == "2":
-          c2 += 2
+          c2 += 1
           if data[1] == "1":
             secondc_surv += 1
-          fare_sc.append(data[10])
+          fare_sc.append(float(data[10]))
         elif data[2] == "3":
-          c3 += 3
+          c3 += 1
           if data[1] == "1":
             thirdc_surv += 1
-          fare_tc.append(data[10])
+          fare_tc.append(float(data[10]))
       first_sr = round((firstc_surv/c1)*100)
       second_sr = round((secondc_surv/c2)*100)
       third_sr = round((thirdc_surv/c3)*100)
-    output.write(f"The average survival rate of the first class is {first_sr}%\n")
-    output.write(f"The average survival rate of the second class is {second_sr}%\n")
-    output.write(f"The average survival rate of the third class is {third_sr}%\n")
+      avg_fare1 = round(((sum(fare_fc)/len(fare_fc))))
+      avg_fare2 = round(((sum(fare_sc)/len(fare_sc))))
+      avg_fare3 = round(((sum(fare_tc)/len(fare_tc))))
+      output.write(f"The average fare of the first class is ${avg_fare1}\n")
+      output.write(f"The average fare of the second class is ${avg_fare2}\n")
+      output.write(f"The average fare of the third class is ${avg_fare3}\n")
+      output.write(f"The average survival rate of the first class is {first_sr}%\n")
+      output.write(f"The average survival rate of the second class is {second_sr}%\n")
+      output.write(f"The average survival rate of the third class is {third_sr}%\n")
+      if first_sr > second_sr and first_sr > third_sr:
+        output.write("The first class has the highest survival rate")
+      elif second_sr > first_sr and second_sr > third_sr:
+        output.write("The second class has the highest survival rate")
+      elif third_sr > first_sr and third_sr > second_sr:
+        output.write("The third class has the highest survival rate")
   except FileExistsError:
     print(f"Error {'classbasedanalysis.csv'} not found")
 
 
 
+#family size = sibsp + parch + 1
+#if family size 
+#
 
 def main():
   try:
