@@ -147,6 +147,30 @@ def class_based_analysis(file):
   except FileExistsError:
     print(f"Error {'classbasedanalysis.csv'} not found")
 
+def family_survival_patterns(file):
+  try: 
+    with open('familysurvivalpatterns.csv', 'w') as output:
+      if_alone = 0
+      if_wfam = 0
+      one_surv = []
+      wfam_surv = []
+      for line in file:
+        data = line.strip().split(',')
+        family_size = int(data[7]) + int(data[8]) + 1
+        if family_size == 1:
+          if_alone += 1
+          if data[1] == "1":
+            one_surv.append(data[1])
+        elif family_size > 1:
+          if_wfam += 1
+          if data[1] == "1":
+            wfam_surv.append(data[1])
+      alone_sr = round((len(one_surv)/if_alone)*100)
+      family_sr = round((len(wfam_surv)/if_wfam)*100)
+      output.write(f"The survival rate of travelers alone on the titanic is {alone_sr}%\n")
+      output.write(f"The survival rate of travelers with family on the titanic is {family_sr}%\n")
+  except FileExistsError:
+    print(f"Error {'familysurvivalpatterns.csv'} not found")
 
 
 #family size = sibsp + parch + 1
@@ -169,6 +193,8 @@ def main():
       age_analysis(file)
       file.seek(1)
       class_based_analysis(file)
+      file.seek(1)
+      family_survival_patterns(file)
 
 
   except FileNotFoundError:
