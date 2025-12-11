@@ -65,7 +65,7 @@ def age_analysis(file):
             except:
                 continue
         all_ages = sum(age_list)
-        avg_age = all_ages/(len(age_list))
+        avg_age = round(all_ages/(len(age_list)))
         output.write(f"The average age is: {avg_age}\n")
         file.seek(1)
         surv_age = []
@@ -86,8 +86,8 @@ def age_analysis(file):
         all_died_ages = sum(died_age)
         oldest_pass = max(age_list)
         youngest_pass = min(age_list)
-        avg_surv_age = all_surv_ages/(len(surv_age))
-        avg_died_age = all_died_ages/(len(died_age))
+        avg_surv_age = round(all_surv_ages/(len(surv_age)))
+        avg_died_age = round(all_died_ages/(len(died_age)))
         output.write(f"The average age of all survivors of the titanic is: {avg_surv_age}\n")
         output.write(f"The average age of all the non-survivors of the titanic is: {avg_died_age}\n")
         output.write(f"The youngest passenger is {youngest_pass} years old\n")
@@ -152,23 +152,28 @@ def family_survival_patterns(file):
     with open('familysurvivalpatterns.csv', 'w') as output:
       if_alone = 0
       if_wfam = 0
-      one_surv = []
-      wfam_surv = []
+      alone_surv = []
+      family_surv = []
+      next(file)
       for line in file:
         data = line.strip().split(',')
         family_size = int(data[7]) + int(data[8]) + 1
         if family_size == 1:
           if_alone += 1
           if data[1] == "1":
-            one_surv.append(data[1])
+            alone_surv.append(data[1])
         elif family_size > 1:
           if_wfam += 1
           if data[1] == "1":
-            wfam_surv.append(data[1])
-      alone_sr = round((len(one_surv)/if_alone)*100)
-      family_sr = round((len(wfam_surv)/if_wfam)*100)
+            family_surv.append(data[1])
+      alone_sr = round((len(alone_surv)/if_alone)*100)
+      family_sr = round((len(family_surv)/if_wfam)*100)
       output.write(f"The survival rate of travelers alone on the titanic is {alone_sr}%\n")
       output.write(f"The survival rate of travelers with family on the titanic is {family_sr}%\n")
+      if alone_sr > family_sr:
+        output.write("If you were travelling alone, you were more likely to survive than if you wer traveling with a family")
+      elif family_sr > alone_sr:
+        output.write("If you were travelling with a family, you were more likely to survive than if you were travelling alone")
   except FileExistsError:
     print(f"Error {'familysurvivalpatterns.csv'} not found")
 
