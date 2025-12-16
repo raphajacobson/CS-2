@@ -1,6 +1,24 @@
+'''
+rapha_jacobson_titanic_file_io.py
 
-       
+Description: Analyzes the titanic data set and writes information to new files
+
+Features: calculates price of package, calculates the distance a package will go
+
+Log: 1.0
+
+Bugs: 
+'''
+
+
 def load_and_display(file):
+  '''
+    display first 10 rows, column names, and total number of passengers                                                                 
+    Args:
+        file - Titanic data
+    Returns:
+        a list of 10 rows, column names, and total num of passengers
+    '''
   try:
     with open('loadanddisplay.csv', 'w') as output:
       ten_count = 0
@@ -20,11 +38,18 @@ def load_and_display(file):
 
 
 def survival_rate(file):
+  '''
+    find the survival rate of all passengers                                                                 
+    Args:
+        file - Titanic data
+    Returns:
+        The survival rate of all passengers
+    '''
   try: 
     with open('survivalrate.csv', 'w') as output:
       survive = 0
       for line in file:
-        data = line.strip().split(',')
+        data = line.strip().split(',')       
         if len(data) > 1:
           if data[1] == "1":
             survive += 1
@@ -33,6 +58,14 @@ def survival_rate(file):
     print(f"Error {'loadanddisplay.csv'} not found")
 
 def survival_by_gender(file):
+  '''
+    Finds the survival rate by gender
+    Args:
+      file - Titanic data
+    Returns:
+      Percentage of males and females who survived
+      If a male of female is more likely to survive
+    '''
   with open('survivalbygender.csv', 'w') as output:
     try:
       m_survive = 0
@@ -55,6 +88,16 @@ def survival_by_gender(file):
       print(f"Error {'loadanddisplay.csv'} not found")
 
 def age_analysis(file):
+  '''
+    Analysis of the ages of all passengers
+    Args:
+        file - Titanic data
+    Returns:
+      The oldest passenger
+      The youngest passenger
+      The average age of passengers
+      The average age of survivors vs. non-survivors
+    '''
   with open('ageanalysis.csv', 'w') as output:
       try:
         age_list = []
@@ -96,7 +139,15 @@ def age_analysis(file):
         print(f"Error {'ageanalysis'} not found")
 
 def class_based_analysis(file):
-   
+  '''
+  Analyzes data based off of class (1, 2, or 3)
+  Args:
+      file - Titanic data
+  Returns:
+      The survival rate of 1st, 2nd, and 3rd class
+      The average fare paid for 1st, 2nd, and 3rd class
+      A statement saying which class was most likely to survive
+  '''
   try: 
     with open('classbasedanalysis.csv', 'w') as output:
       next(file)
@@ -148,6 +199,15 @@ def class_based_analysis(file):
     print(f"Error {'classbasedanalysis.csv'} not found")
 
 def family_survival_patterns(file):
+  '''
+    Analyze survival based off of family
+    Args:
+        file - Titanic data
+    Returns:
+      Survival rate if you were travelling alone
+      Survival rate if you were travelling with a family
+      A statement saying if your survival chances were better when travelling alone or with a family
+    '''
   try: 
     with open('familysurvivalpatterns.csv', 'w') as output:
       if_alone = 0
@@ -177,10 +237,19 @@ def family_survival_patterns(file):
   except FileExistsError:
     print(f"Error {'familysurvivalpatterns.csv'} not found")
 
+#def charts(file):
+"""
+x = [1, 2, 3, 4, 5]
+  y = [2, 4, 6, 8, 10]
 
-#family size = sibsp + parch + 1
-#if family size 
-#
+  plt.plot(x,y)
+
+  plt.xlabel('X-axis Label')
+  plt.ylabel('Y-axis Label')
+  plt.title('Simple Line Plot')
+
+  plt.show
+"""
 
 def main():
   try:
@@ -188,22 +257,46 @@ def main():
       #header = file.readline().strip().split(',')  # Read the header row
       #name_index = header.index('Name')  # Find the index of 'Name' column
       data = open("titanic.csv")
-
-      load_and_display(file)
-      file.seek(1)
-      survival_rate(file)
-      file.seek(1)
-      survival_by_gender(file)
-      file.seek(1)
-      age_analysis(file)
-      file.seek(1)
-      class_based_analysis(file)
-      file.seek(1)
-      family_survival_patterns(file)
-
+      
+      
+      while True:
+        inp = input("This code analzes the titanic data set. What would you like do do?\n" \
+        "1. Show the first 10 rows, the headers, and display the number of passengers\n" \
+        "2. Display the survival rate of all passengers\n" \
+        "3. Display the survival rate for males and females, and which is more likely to survive\n" \
+        "4. Display the average age of all passengers, the oldest and youngest pasengers, and the average age of all survivors vs. non-survivors\n" \
+        "5. Display the survival rate and average fare paid based off class(1st, 2nd, or 3rd)\n" \
+        "6. Display the survival rates based off of family size and display whether traveling alone increased or decreased you chances of survival\n" \
+        "7. Display bar charts comparing survival rates by gender, a histogram showing age distribution, and a bar chart showing survival rate by class\n" \
+        "8. A complete analysis report of the passengers on the titanic\n"
+        ": ")
+        if inp == "1":
+          load_and_display(file)
+          file.seek(1)
+        elif inp == "2":
+          survival_rate(file)
+          file.seek(1)
+        elif inp == "3":
+          survival_by_gender(file)
+          file.seek(1)
+        elif inp == "4":
+          age_analysis(file)
+          file.seek(1)
+        elif inp == "5":
+          class_based_analysis(file)
+          file.seek(1)
+        elif inp == "6":
+          family_survival_patterns(file)
+          file.seek(1)
+        elif inp == "7":
+          #charts(file)
+          file.seek(1)
+        ##elif inp == "8":
+          ##comprehensive_report(file)
+        else:
+          print("Invalid response - Please try again")
 
   except FileNotFoundError:
     print("Error: 'titanic.csv' file not found.")  
   
-
 main()
