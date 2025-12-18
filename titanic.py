@@ -3,7 +3,7 @@ rapha_jacobson_titanic_file_io.py
 
 Description: Analyzes the titanic data set and writes information to new files
 
-Features: calculates price of package, calculates the distance a package will go
+Features: Comprehensive report
 
 Log: 1.0
 
@@ -348,3 +348,4 @@ def main():
     print("Error: 'titanic.csv' file not found.")  
   
 main()
+
