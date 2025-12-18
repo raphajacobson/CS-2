@@ -10,7 +10,6 @@ Log: 1.0
 Bugs: 
 '''
 
-
 def load_and_display(file):
   '''
     display first 10 rows, column names, and total number of passengers                                                                 
@@ -20,19 +19,19 @@ def load_and_display(file):
         a list of 10 rows, column names, and total num of passengers
     '''
   try:
-    with open('loadanddisplay.csv', 'w') as output:
+    with open('loadanddisplay.csv', 'w') as output:                                             #Create a new file and write into it (maker recognizable by "output")
       ten_count = 0
       for line in file:
         output.write(line)
         ten_count+=1
         if ten_count == 11:
           break
-      file.seek(1)
+      file.seek(1)                                                                              #bring pointer back to line 1
       pass_count = 0
       for line in file:
         if len(line) > 1:
           pass_count += 1
-      output.write(f"There are {pass_count - 1} passengers")
+      output.write(f"There are {pass_count - 1} passengers")                                    #Write to the loadanddisplay file the amount of passengers on the titanic
   except FileNotFoundError:
     print(f"Error {'loadanddisplay.csv'} not found")
 
@@ -46,14 +45,14 @@ def survival_rate(file):
         The survival rate of all passengers
     '''
   try: 
-    with open('survivalrate.csv', 'w') as output:
+    with open('survivalrate.csv', 'w') as output:                                    #Create a new file and write into it (maker recognizable by "output")
       survive = 0
       for line in file:
-        data = line.strip().split(',')       
+        data = line.strip().split(',')                                               #Create variable "data" which creates a list out of each line in the titanic data set (makes it easy to find a specific data point through index)
         if len(data) > 1:
           if data[1] == "1":
             survive += 1
-      output.write (f"{survive / 891 * 100} %")
+      output.write (f"{survive / 891 * 100} %")                                      #write to the survivalrate.csv file the survivval rate of all passengers
   except FileNotFoundError:
     print(f"Error {'loadanddisplay.csv'} not found")
 
@@ -66,24 +65,24 @@ def survival_by_gender(file):
       Percentage of males and females who survived
       If a male of female is more likely to survive
     '''
-  with open('survivalbygender.csv', 'w') as output:
+  with open('survivalbygender.csv', 'w') as output:                         #Create a new file and write into it (maker recognizable by "output")
     try:
       m_survive = 0
       f_survive = 0
       for line in file:
-        data = line.strip().split(',')
+        data = line.strip().split(',')                                      #Create variable "data" which creates a list out of each line in the titanic data set (makes it easy to find a specific data point through index)
         if data[1] == "1" and data[5] == "male":
           m_survive += 1
         if data[1] == "1" and data[5] == "female":
           f_survive += 1
-      m_surv_rate = m_survive / 577 * 100
-      f_surv_rate = f_survive / 314 * 100
-      output.write (f"The female survival rate is {f_surv_rate}%\n")
-      output.write (f"The male survival rate is {m_surv_rate}%\n")
+      m_surv_rate = m_survive / 577 * 100                                   #calculate percentage of male survival rate
+      f_surv_rate = f_survive / 314 * 100                                   #calculate percentage of female survival rate
+      output.write (f"The female survival rate is {f_surv_rate}%\n")        #write to survivalbygender.csv
+      output.write (f"The male survival rate is {m_surv_rate}%\n")          #write to survivalbygender.csv
       if m_surv_rate > f_surv_rate:
-        output.write("Therefore the male survival rate is higher")
+        output.write("Therefore the male survival rate is higher")          #write to survivalbygender.csv
       elif f_surv_rate > m_surv_rate:
-        output.write("Therefore the female survival rate is higher")
+        output.write("Therefore the female survival rate is higher")        #write to survivalbygender.csv
     except FileNotFoundError:
       print(f"Error {'loadanddisplay.csv'} not found")
 
@@ -98,31 +97,31 @@ def age_analysis(file):
       The average age of passengers
       The average age of survivors vs. non-survivors
     '''
-  with open('ageanalysis.csv', 'w') as output:
+  with open('ageanalysis.csv', 'w') as output:                               #Create a new file and write into it (maker recognizable by "output")
       try:
         age_list = []
         for line in file:
-            data = line.strip().split(',')
+            data = line.strip().split(',')                                   #Create variable "data" which creates a list out of each line in the titanic data set (makes it easy to find a specific data point through index)
             try:
-                age_list.append(float(data[6]))
+                age_list.append(float(data[6]))                              #add index 6 of every line in the titanic data set to the list named "age_list"
             except:
                 continue
         all_ages = sum(age_list)
         avg_age = round(all_ages/(len(age_list)))
-        output.write(f"The average age is: {avg_age}\n")
-        file.seek(1)
+        output.write(f"The average age is: {avg_age}\n")                     #write to the ageanalysis.csv file
+        file.seek(1)                                                         #bring pointer back to line 1
         surv_age = []
         died_age = []
         for line in file:
             data = line.strip().split(',')
             if data[1] == "1":
                 try:
-                    surv_age.append(float(data[6]))
+                    surv_age.append(float(data[6]))                         #add data at index 6 to the surv_age list
                 except:
                     continue
             else:
                 try:
-                    died_age.append(float(data[6]))
+                    died_age.append(float(data[6]))                         #add data at index 6 to the died_age list
                 except:
                     continue
         all_surv_ages = sum(surv_age)
@@ -149,7 +148,7 @@ def class_based_analysis(file):
       A statement saying which class was most likely to survive
   '''
   try: 
-    with open('classbasedanalysis.csv', 'w') as output:
+    with open('classbasedanalysis.csv', 'w') as output:                                                   #Create a new file and write into it (maker recognizable by "output")
       next(file)
       firstc_surv = 0
       secondc_surv = 0
@@ -161,7 +160,7 @@ def class_based_analysis(file):
       c2 = 0
       c3 = 0
       for line in file:
-        data = line.strip().split(',')
+        data = line.strip().split(',')                                                                    #Create variable "data" which creates a list out of each line in the titanic data set (makes it easy to find a specific data point through index)
         if data[2] == "1":
           c1 += 1
           if data[1] == "1":
@@ -209,14 +208,14 @@ def family_survival_patterns(file):
       A statement saying if your survival chances were better when travelling alone or with a family
     '''
   try: 
-    with open('familysurvivalpatterns.csv', 'w') as output:
+    with open('familysurvivalpatterns.csv', 'w') as output:                                  #Create a new file and write into it (maker recognizable by "output")
       if_alone = 0
       if_wfam = 0
       alone_surv = []
       family_surv = []
       next(file)
       for line in file:
-        data = line.strip().split(',')
+        data = line.strip().split(',')                                                      #Create variable "data" which creates a list out of each line in the titanic data set (makes it easy to find a specific data point through index)
         family_size = int(data[7]) + int(data[8]) + 1
         if family_size == 1:
           if_alone += 1
@@ -237,19 +236,7 @@ def family_survival_patterns(file):
   except FileExistsError:
     print(f"Error {'familysurvivalpatterns.csv'} not found")
 
-#def charts(file):
-"""
-x = [1, 2, 3, 4, 5]
-  y = [2, 4, 6, 8, 10]
 
-  plt.plot(x,y)
-
-  plt.xlabel('X-axis Label')
-  plt.ylabel('Y-axis Label')
-  plt.title('Simple Line Plot')
-
-  plt.show
-"""
 
 def main():
   try:
@@ -268,11 +255,11 @@ def main():
         "5. Display the survival rate and average fare paid based off class(1st, 2nd, or 3rd)\n" \
         "6. Display the survival rates based off of family size and display whether traveling alone increased or decreased you chances of survival\n" \
         "7. Display bar charts comparing survival rates by gender, a histogram showing age distribution, and a bar chart showing survival rate by class\n" \
-        "8. A complete analysis report of the passengers on the titanic\n"
+        #"8. A complete analysis report of the passengers on the titanic\n"
         ": ")
         if inp == "1":
           load_and_display(file)
-          file.seek(1)
+          file.seek(1)                                                              #bring pointer back to line 1
         elif inp == "2":
           survival_rate(file)
           file.seek(1)
@@ -287,9 +274,6 @@ def main():
           file.seek(1)
         elif inp == "6":
           family_survival_patterns(file)
-          file.seek(1)
-        elif inp == "7":
-          #charts(file)
           file.seek(1)
         ##elif inp == "8":
           ##comprehensive_report(file)
