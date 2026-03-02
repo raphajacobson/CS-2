@@ -1,0 +1,138 @@
+'''
+TTT Algo
+1. Create board. Borders or "E" as placeholder
+2. 2 players or 1 player and robot?
+3. Random.choice for who is x or 0
+4. Random.choice for who goes first
+4a. Infinite loop
+5. Display board
+6. Ask player 1 where they want to place their mark (In column, row form)
+7. Choose indicies
+8. Check if space is free and input is valid
+9. Check if draw or win
+10. If win, or tries = 9 and draw break the loop
+11. Player 2 or robot proceeds with steps 5-9 
+'''
+
+def build_board():
+#make 3x3 empty board and print it
+    board = [[' 1 ', ' 2 ', ' 3 '],
+             [' 4 ', ' 5 ', ' 6 '],
+             [' 7 ', ' 8 ', ' 9 ']
+    ]
+    for row in board:
+        for cell in row:
+            print(cell, end=' ')
+        print()
+
+
+
+def players_move(board, player):
+    while True:
+        x_placement = input(f"enter the number you would like to replace with an {player}: ")   
+        if x_placement == "1":
+            if board[0][0] == " O " or board[0][0] == " X ":
+                print("That spot is already taken - try again")
+            else:
+                board[0][0] = player
+                break
+        elif x_placement == "2":
+            if board[0][1] == " O " or board[0][1] == " X ":
+                print("That spot is already taken - try again")
+            else:
+                board[0][1] = player
+                break
+        elif x_placement == "3":
+            if board[0][2] == " O " or board[0][2] == " X ":
+                print("That spot is already taken - try again")
+            else:
+                board[0][2] = player
+                break
+        elif x_placement == "4":
+            if board[1][0] == " O " or board[1][0] == " X ":
+                print("That spot is already taken - try again")
+            else:
+                board[1][0] = player
+                break
+        elif x_placement == "5":
+            if board[1][1] == " O " or board[1][1] == " X ":
+                print("That spot is already taken - try again")
+            else:
+                board[1][1] = player
+                break
+        elif x_placement == "6":
+            if board[1][2] == " O " or board[1][2] == " X ":
+                print("That spot is already taken - try again")
+            else:
+                board[1][2] = player
+                break
+        elif x_placement == "7":
+            if board[2][0] == " O " or board[2][0] == " X ":
+                print("That spot is already taken - try again")
+            else:
+                board[2][0] = player
+                break
+        elif x_placement == "8":
+            if board[2][1] == " O " or board[2][1] == " X ":
+                print("That spot is already taken - try again")
+            else:
+                board[2][1] = player
+                break
+        elif x_placement == "9":
+            if board[2][2] == " O " or board[2][2] == " X ":
+                print("That spot is already taken - try again")
+            else:
+                board[2][2] = player
+                break
+        else:
+            print("Invalid input - Try again")
+
+    for row in board:
+        for cell in row:
+            print(cell, end=' ')
+        print()
+
+
+'''
+def check_winner(board, player):
+
+
+
+def is_draw(board):
+#return True if the board is full with no winner
+'''
+
+def play_game():
+    board = [[' 1 ', ' 2 ', ' 3 '],
+             [' 4 ', ' 5 ', ' 6 '],
+             [' 7 ', ' 8 ', ' 9 ']
+    ]
+    for row in board:
+        for cell in row:
+            print(cell, end=' ')
+        print()
+    tries = 0
+    while tries <= 9:
+        players_move(board, " X ")
+        tries += 1
+        print(tries)
+        if tries > 9:
+            print("The game ended as a tie")
+            break
+        players_move(board, " O ")
+        tries += 1
+        print(tries)
+        if tries > 9:
+            print("The game ended as a tie")
+            break
+
+        
+        
+
+
+
+def main():
+    play_game()
+   
+    
+main()
