@@ -13,6 +13,7 @@ TTT Algo
 10. If win, or tries = 9 and draw break the loop
 11. Player 2 or robot proceeds with steps 5-9 
 '''
+import random
 
 def build_board():
 #make 3x3 empty board and print it
@@ -25,60 +26,58 @@ def build_board():
             print(cell, end=' ')
         print()
 
-
-
 def players_move(board, player):
     while True:
-        x_placement = input(f"enter the number you would like to replace with an {player}: ")   
-        if x_placement == "1":
+        placement = input(f"Player {player}: enter the number where you would like to move: ")   
+        if placement == "1":
             if board[0][0] == " O " or board[0][0] == " X ":
                 print("That spot is already taken - try again")
             else:
                 board[0][0] = player
                 break
-        elif x_placement == "2":
+        elif placement == "2":
             if board[0][1] == " O " or board[0][1] == " X ":
                 print("That spot is already taken - try again")
             else:
                 board[0][1] = player
                 break
-        elif x_placement == "3":
+        elif placement == "3":
             if board[0][2] == " O " or board[0][2] == " X ":
                 print("That spot is already taken - try again")
             else:
                 board[0][2] = player
                 break
-        elif x_placement == "4":
+        elif placement == "4":
             if board[1][0] == " O " or board[1][0] == " X ":
                 print("That spot is already taken - try again")
             else:
                 board[1][0] = player
                 break
-        elif x_placement == "5":
+        elif placement == "5":
             if board[1][1] == " O " or board[1][1] == " X ":
                 print("That spot is already taken - try again")
             else:
                 board[1][1] = player
                 break
-        elif x_placement == "6":
+        elif placement == "6":
             if board[1][2] == " O " or board[1][2] == " X ":
                 print("That spot is already taken - try again")
             else:
                 board[1][2] = player
                 break
-        elif x_placement == "7":
+        elif placement == "7":
             if board[2][0] == " O " or board[2][0] == " X ":
                 print("That spot is already taken - try again")
             else:
                 board[2][0] = player
                 break
-        elif x_placement == "8":
+        elif placement == "8":
             if board[2][1] == " O " or board[2][1] == " X ":
                 print("That spot is already taken - try again")
             else:
                 board[2][1] = player
                 break
-        elif x_placement == "9":
+        elif placement == "9":
             if board[2][2] == " O " or board[2][2] == " X ":
                 print("That spot is already taken - try again")
             else:
@@ -93,14 +92,31 @@ def players_move(board, player):
         print()
 
 
-'''
 def check_winner(board, player):
-
-
-
-def is_draw(board):
-#return True if the board is full with no winner
-'''
+    if board[0][0] == player and board[0][1] == player and board[0][2] == player:
+        print(f"Player {player} has won the game.")
+        quit()
+    elif board[1][0] == player and board[1][1] == player and board[1][2] == player:
+        print(f"Player {player} has won the game.")
+        quit()
+    elif board[2][0] == player and board[2][1] == player and board[2][2] == player:
+        print(f"Player {player} has won the game.")
+        quit()
+    elif board[0][0] == player and board[1][0] == player and board[2][0] == player:
+        print(f"Player {player} has won the game.")
+        quit()
+    elif board[0][1] == player and board[1][1] == player and board[2][1] == player:
+        print(f"Player {player} has won the game.")
+        quit()
+    elif board[0][2] == player and board[1][2] == player and board[2][2] == player:
+        print(f"Player {player} has won the game.")
+        quit()
+    elif board[0][0] == player and board[1][1] == player and board[2][2] == player:
+        print(f"Player {player} has won the game.")
+        quit()
+    elif board[0][2] == player and board[1][1] == player and board[2][0] == player:
+        print(f"Player {player} has won the game.")
+        quit()
 
 def play_game():
     board = [[' 1 ', ' 2 ', ' 3 '],
@@ -111,24 +127,39 @@ def play_game():
         for cell in row:
             print(cell, end=' ')
         print()
-    tries = 0
-    while tries <= 9:
-        players_move(board, " X ")
-        tries += 1
-        print(tries)
-        if tries > 9:
-            print("The game ended as a tie")
-            break
-        players_move(board, " O ")
-        tries += 1
-        print(tries)
-        if tries > 9:
-            print("The game ended as a tie")
-            break
-
-        
-        
-
+    first_options = [" X ", " O "]
+    first = random.choice(first_options)
+    if first == " X ":
+        print("Decide among yourselves who will be X and who will be O. Player X will go first")
+        tries = 0
+        while tries < 9:
+            players_move(board, " X ")
+            check_winner(board, " X ")
+            tries += 1
+            if tries == 9:
+                print("The game ended as a tie")
+                break
+            players_move(board, " O ")
+            check_winner(board, " O ")
+            tries += 1
+            if tries == 9:  
+                print("The game ended as a tie")
+                break
+    else:
+        print("Decide among yourselves who will be X and who will be O. Player O will go first")
+        tries = 0
+        while tries < 9:
+            players_move(board, " O ")
+            check_winner(board, " O ")
+            tries += 1
+            if tries == 9:
+                print("The game ended as a tie")
+                break
+            players_move(board, " X ")
+            check_winner(board, " X ")
+            tries += 1
+            if tries == 9:
+                print("The game has ended in a tie")
 
 
 def main():
