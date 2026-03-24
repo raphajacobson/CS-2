@@ -1,3 +1,8 @@
+#Name: Rapha Jacobson
+#Description: A game of tic tac toe
+#Bonuses: Can play with 2 players or with comp
+#Bugs: 
+#1.0 LRJ
 '''
 TTT Algo
 1. Create board. Borders or "E" as placeholder
@@ -10,7 +15,7 @@ TTT Algo
 7. Choose indicies
 8. Check if space is free and input is valid
 9. Check if draw or win
-10. If win, or tries = 9 and draw break the loop
+10. If win, or tries = 9 and draw, break the loop
 11. Player 2 or robot proceeds with steps 5-9 
 '''
 import random
@@ -25,6 +30,12 @@ def build_board():
         for cell in row:
             print(cell, end=' ')
         print()
+
+#def show_board(cells):
+    # iterate through the cells list
+    # print each cell
+    # after each move, cells list updates, then you call show_board again and it will print the updated board
+    # based on the list cells
 
 def players_move(board, player):
     while True:
@@ -91,6 +102,42 @@ def players_move(board, player):
             print(cell, end=' ')
         print()
 
+def comps_move(board, player):
+    print("The compute will now move: " \
+    "")
+    while True:
+        row = random.randint(0, 2)
+        col = random.randint(0, 2)
+        if board[row][col] == " X " or board[row][col] == " O ":
+            row = random.randint(0, 2)
+            col = random.randint(0, 2)
+        else:
+            break
+    board[row][col] = player
+
+    for row in board:
+        for cell in row:
+            print(cell, end=' ')
+        print()
+    '''
+
+    while True:
+        places = [board[0][0], board[1][0], board[2][0], board[0][1], board[0][2], board[1][1], board[2][2], board[1][2], board[2][1]]
+        place = random.choice(places)
+        if place == " X " or place == " O ":
+            random.choice(place)
+        else:
+            break
+    #place = player
+    cells = []
+    for row in board:
+        for cell in row:
+            cells.append(cell)
+            if cell == place:
+                cell = player
+                print()
+''' 
+
 
 def check_winner(board, player):
     if board[0][0] == player and board[0][1] == player and board[0][2] == player:
@@ -129,41 +176,112 @@ def play_game():
         print()
     first_options = [" X ", " O "]
     first = random.choice(first_options)
-    if first == " X ":
-        print("Decide among yourselves who will be X and who will be O. Player X will go first")
-        tries = 0
-        while tries < 9:
-            players_move(board, " X ")
-            check_winner(board, " X ")
-            tries += 1
-            if tries == 9:
-                print("The game ended as a tie")
-                break
-            players_move(board, " O ")
-            check_winner(board, " O ")
-            tries += 1
-            if tries == 9:  
-                print("The game ended as a tie")
-                break
+    game = input("Would you like to play with 2 players or with a computer? Enter '2' or 'c': ")
+    if game == "2":
+        if first == " X ":
+            print("Decide among yourselves who will be X and who will be O. Player X will go first")
+            tries = 0
+            while tries < 9:
+                players_move(board, " X ")
+                check_winner(board, " X ")
+                tries += 1
+                if tries == 9:
+                    print("The game ended as a tie")
+                    break
+                players_move(board, " O ")
+                check_winner(board, " O ")
+                tries += 1
+                if tries == 9:  
+                    print("The game ended as a tie")
+                    break
+        else:
+            print("Decide among yourselves who will be X and who will be O. Player O will go first")
+            tries = 0
+            while tries < 9:
+                players_move(board, " O ")
+                check_winner(board, " O ")
+                tries += 1
+                if tries == 9:
+                    print("The game ended as a tie")
+                    break
+                players_move(board, " X ")
+                check_winner(board, " X ")
+                tries += 1
+                if tries == 9:
+                    print("The game has ended in a tie")
+    elif game == "c" or game == "C":
+        if first == " X ":
+            who = ["the computer", "you"]
+            whogoes = random.choice(who)
+            print(f"The computer will be {first} and {whogoes} will go first")
+            if whogoes == "you":
+                tries = 0
+                while tries < 9:
+                    players_move(board, " O ")
+                    check_winner(board, " O ")
+                    tries += 1
+                    if tries == 9:
+                        print("The game ended as a tie")
+                        break
+                    comps_move(board, " X ")
+                    check_winner(board, " X ")
+                    tries += 1
+                    if tries == 9:  
+                        print("The game ended as a tie")
+                        break
+            else:
+                tries = 0
+                while tries < 9:
+                    comps_move(board, " X ")
+                    check_winner(board, " X ")
+                    tries += 1
+                    if tries == 9:
+                        print("The game ended as a tie")
+                        break
+                    players_move(board, " O ")
+                    check_winner(board, " O ")
+                    tries += 1
+                    if tries == 9:  
+                        print("The game ended as a tie")
+                        break
+        if first == " O ":
+            who = ["the computer", "you"]
+            whogoes = random.choice(who)
+            print(f"The computer will be {first} and {whogoes} will go first")
+            if whogoes == "you":
+                tries = 0
+                while tries < 9:
+                    players_move(board, " X ")
+                    check_winner(board, " X ")
+                    tries += 1
+                    if tries == 9:
+                        print("The game ended as a tie")
+                        break
+                    comps_move(board, " O ")
+                    check_winner(board, " O ")
+                    tries += 1
+                    if tries == 9:  
+                        print("The game ended as a tie")
+                        break
+            else:
+                tries = 0
+                while tries < 9:
+                    comps_move(board, " O ")
+                    check_winner(board, " O ")
+                    tries += 1
+                    if tries == 9:
+                        print("The game ended as a tie")
+                        break
+                    players_move(board, " X ")
+                    check_winner(board, " X ")
+                    tries += 1
+                    if tries == 9:  
+                        print("The game ended as a tie")
+                        break
     else:
-        print("Decide among yourselves who will be X and who will be O. Player O will go first")
-        tries = 0
-        while tries < 9:
-            players_move(board, " O ")
-            check_winner(board, " O ")
-            tries += 1
-            if tries == 9:
-                print("The game ended as a tie")
-                break
-            players_move(board, " X ")
-            check_winner(board, " X ")
-            tries += 1
-            if tries == 9:
-                print("The game has ended in a tie")
-
+        print("Invalid input - Try again")
 
 def main():
     play_game()
-   
     
 main()
