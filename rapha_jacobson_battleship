@@ -1,3 +1,4 @@
+
 '''
 1. Build 5v5 board
 2. Define 4 random spots where the "battleships" are
@@ -78,6 +79,7 @@ def main():
                 [' X ', ' X ', ' X ', ' X ', ' X '],
                 [' X ', ' X ', ' X ', ' X ', ' X ']
         ]
+        show_board(board)
         def_ships(ships_board)
         tries = 0
         print("Welcome to battleship - you have 10 tries to try and hit all 4 ships")
@@ -85,6 +87,7 @@ def main():
             row_input, col_input = get_coordinates(board)
             hit_or_miss(row_input, col_input, board, ships_board)
             tries += 1
+            print(f"you have {10 - tries} tries left!")
         else:
             while True:
                 again = input("Your 10 tries are up. Would you like to play again? (y/n): ")
