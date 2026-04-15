@@ -1,40 +1,18 @@
-'''
-1. Build 5v5 board
-2. Define 4 random spots where the "battleships" are
-3. Ask user for a coordinate to shoot at
-4. Tell them if it was a "hit" or "miss"
-5. Print board and repeat steps 3-5
-'''
 
 import random
 
-def build_board():
-#make 5x5 empty board and print it
-    board = [[' X ', ' X ', ' X ', ' X ', ' X '],                     #build a 5x5 board with numbers as placeholders for each coordinate
-            [' X ', ' X ', ' X ', ' X ', ' X '],
-            [' X ', ' X ', ' X ', ' X ', ' X '],
-            [' X ', ' X ', ' X ', ' X ', ' X '],
-            [' X ', ' X ', ' X ', ' X ', ' X ']
-    ]
-    for row in board:                                   #for loop which prints a board in 2D form
-        for cell in row:
-            print(cell, end=' ')                        
-        print()
-    return board
-
-
-def get_dots(board):
+def def_ships(ships_board):
     ships = []
     tries = 0
     while tries < 4:
         row = [0, 1, 2, 3, 4]
         col = [0, 1, 2, 3, 4]
-        row = random.choice(row)
-        col = random.choice(col)
+        row_choice = random.choice(row)
+        col_choice = random.choice(col)
         spot = f'{row},{col}'
         ships.append(spot)
+        ships_board[row_choice][col_choice] = " S "
         tries += 1
-    return ships
 
 def show_board(board):                                  #function that prints the board (even when positions change from the placholder numbers to "X" or "O")
     for row in board:
@@ -42,26 +20,35 @@ def show_board(board):                                  #function that prints th
             print(cell, end=' ')
         print()
 
-def get_coordinates():
-    check_inp = [1, 2, 3, 4, 5]
+def get_coordinates(board):
+    check_inp = ["1", "2", "3", "4", "5"]
     while True:
-        row_input = int(input("In which row would you like to shoot? (1, 2, 3, 4, or 5): "))
-        if row_input not in check_inp:
-            print("Invalid input - please try again.")
+        while True:
+            
+            row_input = input("In which row would you like to shoot? (1, 2, 3, 4, or 5): ")
+            if row_input in check_inp:
+                    break
+            else:
+                print("Invalid input - please try again")
+        while True:
+            col_input = input("In which column would you like to shoot? (1, 2, 3, 4, 5): ")
+            #making sure input is within boundaries
+            if col_input in check_inp:
+                break
+            else:
+                print("invalid input - please try again")
+        if board[int(row_input)-1][int(col_input)-1] == " H " or board[int(row_input)-1][int(col_input)-1] == " M ":
+        #making sure the inputted coordinate is not already guessed and if so ask for different coordinates
+            print("That spot is already taken. Enter another coordinate you have not yet used.")
         else:
             break
-    while True:
-        col_input = int(input("In which column would you like to shoot? (1, 2, 3, 4, 5): "))
-        check_inp = [1, 2, 3, 4, 5]
-        if col_input not in check_inp:
-            print("Invalid input - please try again.")
-        else:
-            break
-    return row_input - 1, col_input - 1 
+        
+            
+    return int(row_input) - 1, int(col_input) - 1 
 
-def hit_or_miss(row_input, col_input, board, ships):
+def hit_or_miss(row_input, col_input, board, ships_board):
     
-    if f'{row_input},{col_input}' in ships:
+    if ships_board[row_input][col_input] == " S ":
         board[row_input][col_input] = " H "
         print("You have hit a ship!")
         show_board(board)
@@ -69,20 +56,36 @@ def hit_or_miss(row_input, col_input, board, ships):
         board[row_input][col_input] = " M "
         print("you have missed!")
         show_board(board)
- 
+
 def main():
     while True:
-        board = build_board()
-        get_dots(board)
-        row_input, col_input = get_coordinates()
-        ships = get_dots(board)
-        hit_or_miss(row_input, col_input, board, ships)
-        while True:
-            quit = input("if you would like to quit, enter 'q' otherwise, enter 'c': ")
-            if quit == "q":
-                exit()
-            elif quit == "c":
-                continue
-            else:
-                print("Invalid Input - Try again")
+        board = [[' X ', ' X ', ' X ', ' X ', ' X '],                     #build a 5x5 board with X's as placeholders for each coordinate
+                [' X ', ' X ', ' X ', ' X ', ' X '],
+                [' X ', ' X ', ' X ', ' X ', ' X '],
+                [' X ', ' X ', ' X ', ' X ', ' X '],
+                [' X ', ' X ', ' X ', ' X ', ' X ']
+        ]
+        ships_board = [[' X ', ' X ', ' X ', ' X ', ' X '],                     #build a 5x5 board where the coordinate of the ships will be stored
+                [' X ', ' X ', ' X ', ' X ', ' X '],
+                [' X ', ' X ', ' X ', ' X ', ' X '],
+                [' X ', ' X ', ' X ', ' X ', ' X '],
+                [' X ', ' X ', ' X ', ' X ', ' X ']
+        ]
+        def_ships(ships_board)
+        tries = 0
+        print("Welcome to battleship - you have 10 tries to try and hit all 4 ships")
+        while tries < 10:
+            row_input, col_input = get_coordinates(board)
+            hit_or_miss(row_input, col_input, board, ships_board)
+            tries += 1
+        else:
+            while True:
+                again = input("Your 10 tries are up. Would you like to play again? (y/n): ")
+                if again == "y":
+                    break
+                elif again == "n":
+                    exit()
+                else:
+                    print("Invalid input - please try again.")
+
 main()
