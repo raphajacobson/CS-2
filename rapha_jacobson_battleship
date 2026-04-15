@@ -1,3 +1,10 @@
+'''
+1. Build 5v5 board
+2. Define 4 random spots where the "battleships" are
+3. Ask user for a coordinate to shoot at
+4. Tell them if it was a "hit" or "miss"
+5. Print board and repeat steps 3-5
+'''
 
 import random
 
