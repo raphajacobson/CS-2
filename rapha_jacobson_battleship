@@ -9,7 +9,7 @@
 
 import random
 
-def def_ships(ships_board):
+def def_ships(board):
     ships = []
     tries = 0
     while tries < 4:
@@ -17,35 +17,38 @@ def def_ships(ships_board):
         col = [0, 1, 2, 3, 4]
         row_choice = random.choice(row)
         col_choice = random.choice(col)
-        spot = f'{row},{col}'
+        spot = f'{row_choice},{col_choice}'
         ships.append(spot)
-        ships_board[row_choice][col_choice] = " S "
+        board[row_choice][col_choice] = " S "
         tries += 1
+    return board
 
-def show_board(board):                                  #function that prints the board (even when positions change from the placholder numbers to "X" or "O")
+def show_board(board, player):                                  #function that prints the board (even when positions change from the placholder numbers to "X" or "O")
+    print(f"{player}, this is your board")
     for row in board:
         for cell in row:
             print(cell, end=' ')
         print()
 
-def get_coordinates(board):
+def get_coordinates(board, player):
     check_inp = ["1", "2", "3", "4", "5"]
     while True:
         while True:
-            
-            row_input = input("In which row would you like to shoot? (1, 2, 3, 4, or 5): ")
+            row_input = input(f"{player}, in which row would you like to shoot? (1, 2, 3, 4, or 5): ")
             if row_input in check_inp:
-                    break
+                break
             else:
                 print("Invalid input - please try again")
         while True:
-            col_input = input("In which column would you like to shoot? (1, 2, 3, 4, 5): ")
+            col_input = input(f"{player}, in which column would you like to shoot? (1, 2, 3, 4, 5): ")
             #making sure input is within boundaries
             if col_input in check_inp:
                 break
             else:
                 print("invalid input - please try again")
-        if board[int(row_input)-1][int(col_input)-1] == " H " or board[int(row_input)-1][int(col_input)-1] == " M ":
+        row_input = int(row_input)
+        col_input = int(col_input)
+        if board[row_input - 1][col_input - 1] == " H " or board[row_input - 1][col_input - 1] == " M ":
         #making sure the inputted coordinate is not already guessed and if so ask for different coordinates
             print("That spot is already taken. Enter another coordinate you have not yet used.")
         else:
@@ -54,43 +57,75 @@ def get_coordinates(board):
             
     return int(row_input) - 1, int(col_input) - 1 
 
-def hit_or_miss(row_input, col_input, board, ships_board):
+def hit_or_miss(row_input, col_input, board, ships_board, player):
     
     if ships_board[row_input][col_input] == " S ":
         board[row_input][col_input] = " H "
         print("You have hit a ship!")
-        show_board(board)
+        show_board(board, player)
     else:
         board[row_input][col_input] = " M "
         print("you have missed!")
-        show_board(board)
+        show_board(board, player)
+
+def if_winner(board, player):
+    hits = 0
+    for row in range(5):
+        for col in range(5):
+            if board[row][col] == " H ":
+                hits += 1
+    if hits == 4:
+        print(f"{player} has won! They hit all of your ships!")
+    return hits
 
 def main():
     while True:
-        board = [[' X ', ' X ', ' X ', ' X ', ' X '],                     #build a 5x5 board with X's as placeholders for each coordinate
+        p1_board = [[' X ', ' X ', ' X ', ' X ', ' X '],                     #build a 5x5 board with X's as placeholders for each coordinate
                 [' X ', ' X ', ' X ', ' X ', ' X '],
                 [' X ', ' X ', ' X ', ' X ', ' X '],
                 [' X ', ' X ', ' X ', ' X ', ' X '],
                 [' X ', ' X ', ' X ', ' X ', ' X ']
         ]
-        ships_board = [[' X ', ' X ', ' X ', ' X ', ' X '],                     #build a 5x5 board where the coordinate of the ships will be stored
+        p1_ships_board = [[' X ', ' X ', ' X ', ' X ', ' X '],                     #build a 5x5 board where the coordinate of the ships will be stored
                 [' X ', ' X ', ' X ', ' X ', ' X '],
                 [' X ', ' X ', ' X ', ' X ', ' X '],
                 [' X ', ' X ', ' X ', ' X ', ' X '],
                 [' X ', ' X ', ' X ', ' X ', ' X ']
         ]
-        show_board(board)
-        def_ships(ships_board)
+        p2_board = [[' X ', ' X ', ' X ', ' X ', ' X '],                     #build a 5x5 board with X's as placeholders for each coordinate
+                [' X ', ' X ', ' X ', ' X ', ' X '],
+                [' X ', ' X ', ' X ', ' X ', ' X '],
+                [' X ', ' X ', ' X ', ' X ', ' X '],
+                [' X ', ' X ', ' X ', ' X ', ' X ']
+        ]
+        p2_ships_board = [[' X ', ' X ', ' X ', ' X ', ' X '],                     #build a 5x5 board where the coordinate of the ships will be stored
+                [' X ', ' X ', ' X ', ' X ', ' X '],
+                [' X ', ' X ', ' X ', ' X ', ' X '],
+                [' X ', ' X ', ' X ', ' X ', ' X '],
+                [' X ', ' X ', ' X ', ' X ', ' X ']
+        ]
+        
+        print("Welcome to battleship - you each have 10 tries to try and hit all 4 of your opponent's ships")
+        p1 = input("player 1, enter you name: ")
+        p2 = input("player 2, enter your name: ")
+        show_board(p1_board, p1)
+        show_board(p2_board, p2)
+        p1_ships = def_ships(p1_ships_board)
+        p2_ships = def_ships(p2_ships_board)
         tries = 0
-        print("Welcome to battleship - you have 10 tries to try and hit all 4 ships")
         while tries < 10:
-            row_input, col_input = get_coordinates(board)
-            hit_or_miss(row_input, col_input, board, ships_board)
+            row_input, col_input = get_coordinates(p1_board, p1)
+            hit_or_miss(row_input, col_input, p1_board, p1_ships, p1)
+            if_winner(p1_board, p1)
             tries += 1
-            print(f"you have {10 - tries} tries left!")
+            print(f"{p1}, you have {10 - tries} tries left!")
+            row_input, col_input = get_coordinates(p2_board, p2)
+            hit_or_miss(row_input, col_input, p2_board, p2_ships, p2)
+            if_winner(p2_board, p2)
+            print(f"{p2}, you have {10 - tries} tries left!")
         else:
             while True:
-                again = input("Your 10 tries are up. Would you like to play again? (y/n): ")
+                again = input(f"Neither {p1} nor {p2} won. Would you like to play again? (y/n): ")
                 if again == "y":
                     break
                 elif again == "n":
