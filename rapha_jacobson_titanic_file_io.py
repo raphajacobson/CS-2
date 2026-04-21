@@ -1,13 +1,11 @@
 '''
 rapha_jacobson_titanic_file_io.py
-
+Author: Rapha Jacobson
 Description: Analyzes the titanic data set and writes information to new files
-
-Features: Comprehensive report
-
-Log: 1.0
-
-Bugs: 
+Completed functions: Load and display, calculare survival rate, survival by gender, age analysis, class-based analysis, family survival patterns, comprehensive report
+Bonuses: Comprehensive report, attatched graphs, 
+Bugs: None
+Log: 2.0 - Fixed documentation for variables in family_survival_patterns function and comprehensive_report function. Fixed magic number 891 in surival_rate. 
 '''
 
 def load_and_display(file):
@@ -152,15 +150,15 @@ def class_based_analysis(file):
   try: 
     with open('classbasedanalysis.csv', 'w') as output:                                                   #Create a new file and write into it (maker recognizable by "output")
       next(file)
-      firstc_surv = 0
-      secondc_surv = 0
-      thirdc_surv = 0
-      fare_fc = []                                                                                        #create an empty list named fare_fc
-      fare_sc = []
-      fare_tc = []
-      c1 = 0
-      c2 = 0
-      c3 = 0
+      firstc_surv = 0                                                                                     #variable for the survivors in first class 
+      secondc_surv = 0                                                                                    #variable for the survivors in second class 
+      thirdc_surv = 0                                                                                     #variable for the survivors in third class 
+      fare_fc = []                                                                                        #create an empty list for first class fare
+      fare_sc = []                                                                                        #create an empty list for second class fare
+      fare_tc = []                                                                                        #create an empty list for third class fare
+      c1 = 0                                                                                              #define variable "c1" as zero for the total amount of people in first class
+      c2 = 0                                                                                              #define variable "c2" as zero for the total amount of people in second class
+      c3 = 0                                                                                              #define variable "c3" as zero for the total amount of people in third class
       for line in file:
         data = line.strip().split(',')                                                                    #Create variable "data" which creates a list out of each line in the titanic data set (makes it easy to find a specific data point through index)
         if data[2] == "1":
@@ -211,13 +209,13 @@ def family_survival_patterns(file):
     '''
   try: 
     with open('familysurvivalpatterns.csv', 'w') as output:                                  #Create a new file and write into it (maker recognizable by "output")
-      if_alone = 0
-      if_wfam = 0
-      alone_surv = []
-      family_surv = []
+      if_alone = 0                                                                           #variable for amount of passengers who are aboard alone
+      if_wfam = 0                                                                            #variable for the amount of passengers who also have family aboard      
+      alone_surv = []                                                                        #empty list of the alone passengers who survived
+      family_surv = []                                                                       #empty list of the passengers with family who survived
       next(file)
       for line in file:
-        data = line.strip().split(',')                                                      #Create variable "data" which creates a list out of each line in the titanic data set (makes it easy to find a specific data point through index)
+        data = line.strip().split(',')                                                       #Create variable "data" which creates a list out of each line in the titanic data set (makes it easy to find a specific data point through index)
         family_size = int(data[7]) + int(data[8]) + 1
         if family_size == 1:
           if_alone += 1
@@ -251,16 +249,16 @@ def comprehensive_report(file):
 """
   try:
     with open('comprehensivereport.csv', 'w') as output:
-      pass_count = 0                                                                  #empty list
-      survived = 0
-      female = 0
-      male = 0
-      fclass = 0
-      sclass = 0
-      tclass = 0
-      child = 0
-      adult = 0
-      senior = 0
+      pass_count = 0           #amount of passengers
+      survived = 0             #amount of passengfers that survived
+      female = 0               #amount of female passengers
+      male = 0                 #amount of male passengers
+      fclass = 0               #amount of first class passengers
+      sclass = 0               #amount of second class passengers
+      tclass = 0               #amount of third class passengers
+      child = 0                #amount of passengers who are children (under 18)
+      adult = 0                #amount of passengers who are adults (18 - 60)
+      senior = 0               #amount of passengers who are senior (over 60)
       next(file)                                                                     #skip the first line(headers)
       for line in file: 
         data = line.strip().split(',')                                               #Create variable "data" which creates a list out of each line in the titanic data set (makes it easy to find a specific data point through index)
@@ -287,11 +285,11 @@ def comprehensive_report(file):
             senior += 1
         if len(line) > 1:
           pass_count += 1
-      output.write(f"There were {pass_count} passengers on the titanic\n")                              
+        total_passengers = 891
+      output.write(f"There were {pass_count} passengers on the titanic\n")                                
       output.write(f"A total number of {survived} passengers survived\n") 
-      output.write(f"A total number of {891 - survived} passengers died\n") 
-      output.write(f"{survived / 891 * 100}% of passengers survived\n")                                   
-      output.write(f"There were {female} women aboard\n")
+      output.write(f"A total number of {total_passengers - survived} passengers died\n") 
+      output.write(f"{survived / total_passengers * 100}% of passengers survived\n")                               
       output.write(f"There were {male} men aboard\n")
       output.write(f"There were {fclass} passengers in the first class\n")
       output.write(f"There were {sclass} passengers in the second class\n")
@@ -348,4 +346,3 @@ def main():
     print("Error: 'titanic.csv' file not found.")  
   
 main()
-
