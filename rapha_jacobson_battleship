@@ -106,7 +106,6 @@ def hit_or_miss(row_input, col_input, board, ships_board, player):
     ship = emoji.emojize(":ship:")                          #define variable "ship" as the ship emoji
     water = emoji.emojize(":water_wave:")                   #define variable "water" as the water emoji
     if ships_board[row_input][col_input] == " S ":
-        
         board[row_input][col_input] = ship
         print("You have hit a ship!")
         pygame.mixer.init()                                 #initialize pygame
