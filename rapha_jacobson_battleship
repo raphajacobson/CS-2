@@ -1,5 +1,11 @@
+#Name: Rapha Jacobson
+#Description: A 2-player game of battleships
+#Bonuses: Uses emoji's on the board for water or ships
+#Bugs: 
+#1.0 LRJ
 
 '''
+Plan:
 1. Build 5v5 board
 2. Define 4 random spots where the "battleships" are
 3. Ask user for a coordinate to shoot at
@@ -7,7 +13,9 @@
 5. Print board and repeat steps 3-5
 '''
 
-import random
+import random                                           #import random library
+import emoji                                            #import emoji library
+import pygame
 
 def def_ships(ships_board):
     '''
@@ -54,6 +62,8 @@ def get_coordinates(board, player):
     Returns:
         The integer form of the row and column the user would like to shoot at
     '''       
+    ship = emoji.emojize(":ship:")                                      #define variable "ship" as the ship emoji
+    water = emoji.emojize(":water_wave:")                               #define variable "water" as the water emoji
     check_inp = ["1", "2", "3", "4", "5"]
     while True:
         while True:
@@ -71,7 +81,7 @@ def get_coordinates(board, player):
                 print("invalid input - please try again")
         row_input = int(row_input)
         col_input = int(col_input)
-        if board[row_input - 1][col_input - 1] == " H " or board[row_input - 1][col_input - 1] == " M ":
+        if board[row_input - 1][col_input - 1] == ship or board[row_input - 1][col_input - 1] == water:
         #making sure the inputted coordinate is not already guessed and if so ask for different coordinates
             print("That spot is already taken. Enter another coordinate you have not yet used.")
         else:
@@ -79,6 +89,9 @@ def get_coordinates(board, player):
         
             
     return int(row_input) - 1, int(col_input) - 1 
+
+
+   
 
 def hit_or_miss(row_input, col_input, board, ships_board, player):
     '''
@@ -90,13 +103,14 @@ def hit_or_miss(row_input, col_input, board, ships_board, player):
         ships_board = The secret board which holds the placement of the ships
         player = either p1 or p2 (differentiated in main) a variable which is the user's name which they enter in the beginning of the program
     '''       
-    
+    ship = emoji.emojize(":ship:")                          #define variable "ship" as the ship emoji
+    water = emoji.emojize(":water_wave:")                   #define variable "water" as the water emoji
     if ships_board[row_input][col_input] == " S ":
-        board[row_input][col_input] = " H "
+        board[row_input][col_input] = ship
         print("You have hit a ship!")
         show_board(board, player)
     else:
-        board[row_input][col_input] = " M "
+        board[row_input][col_input] = water
         print("you have missed!")
         show_board(board, player)
 
