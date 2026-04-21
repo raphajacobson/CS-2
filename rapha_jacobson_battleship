@@ -106,12 +106,19 @@ def hit_or_miss(row_input, col_input, board, ships_board, player):
     ship = emoji.emojize(":ship:")                          #define variable "ship" as the ship emoji
     water = emoji.emojize(":water_wave:")                   #define variable "water" as the water emoji
     if ships_board[row_input][col_input] == " S ":
+        
         board[row_input][col_input] = ship
         print("You have hit a ship!")
+        pygame.mixer.init()                                 #initialize pygame
+        hit_sound = pygame.mixer.Sound("soundreality-explosion-fx-343683.wav")             #define hit_sound as the kaboom sound
+        hit_sound.play()                                                                   #play the sound
         show_board(board, player)
     else:
         board[row_input][col_input] = water
         print("you have missed!")
+        pygame.mixer.init()                                  #initialize pygame
+        wrong_sound = pygame.mixer.Sound("universfield-water-splash-02-352021.wav")         #define "wrong_sound" as the water splash sound
+        wrong_sound.play()                                                                  #play the sound
         show_board(board, player)
 
 def if_winner(board, player):
