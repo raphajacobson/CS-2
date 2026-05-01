@@ -15,7 +15,7 @@ Plan:
 
 import random                                           #import random library
 import emoji                                            #import emoji library
-import pygame
+import pygame                                           #import pygame library
 
 def def_ships(ships_board):
     '''
