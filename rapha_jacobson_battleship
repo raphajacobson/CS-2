@@ -28,9 +28,10 @@ def def_ships(ships_board):
     ships = []
     tries = 0
     while tries < 4:
-        row = [0, 1, 2, 3, 4]
-        col = [0, 1, 2, 3, 4]
-        row_choice = random.choice(row)
+    #this while True loop that places 4 ships in a 5x5 array (either player 1 or 2 - defined in main)
+        row = [0, 1, 2, 3, 4]                                               #list of all different options for row coordinates
+        col = [0, 1, 2, 3, 4]                                               #list of all different options for column coordinates
+        row_choice = random.choice(row)                                                                 
         col_choice = random.choice(col)
         spot = f'{row_choice},{col_choice}'
         if ships_board[row_choice][col_choice] in ships:
@@ -49,7 +50,8 @@ def show_board(board, player):
         player = either p1 or p2 (differentiated in main) a variable which is the user's name which they enter in the beginning of the program
     Returns:
         printing the updated user's board in the terminal
-    '''                                #function that prints the board (even when positions change from the placholder numbers to "X" or "O")
+    '''
+    #function that prints the board (even when positions change from the placholder numbers to "X" or "O")
     print(f"{player}, this is your board")
     for row in board:
         for cell in row:
@@ -69,6 +71,7 @@ def get_coordinates(board, player):
     water = emoji.emojize(" :water_wave:")                               #define variable "water" as the water emoji
     check_inp = ["1", "2", "3", "4", "5"]
     while True:
+    #asks user for coordinates, makes sure they are valid, and returns them as row_input and col_input
         while True:
             row_input = input(f"{player}, in which row would you like to shoot? (1, 2, 3, 4, or 5): ")
             if row_input in check_inp:
@@ -110,7 +113,7 @@ def hit_or_miss(row_input, col_input, board, ships_board, player):
     ship = emoji.emojize(" :ship:")                          #define variable "ship" as the ship emoji
     water = emoji.emojize(" :water_wave:")                   #define variable "water" as the water emoji
     if ships_board[row_input][col_input] == " S ":
-        
+    #if they user hit a ship, change that coordinate to a ship emoji, print a statement, and play a kaboom sound
         board[row_input][col_input] = ship
         print("You have hit a ship!")
         pygame.mixer.init()                                 #initialize pygame
@@ -118,6 +121,7 @@ def hit_or_miss(row_input, col_input, board, ships_board, player):
         hit_sound.play()                                                                   #play the sound
         show_board(board, player)
     else:
+    #if they user did NOT hit a ship, change that coordinate to a water emoji, print a statement, and play a splash sound
         board[row_input][col_input] = water
         print("you have missed!")
         pygame.mixer.init()                                  #initialize pygame
@@ -135,6 +139,7 @@ def if_winner(board, player):
         Variable hits which = the amount of ships that user has hit
     '''
     hits = 0
+    #check all coordiates to see if they are a hit ship and add 1 to the "hits" counter every time one is found
     for col in range(5):
         for row in range(5):
             if board[row][col] == emoji.emojize(" :ship:"):
@@ -183,6 +188,8 @@ def main():
             row_input, col_input = get_coordinates(p1_board, p1)
             hit_or_miss(row_input, col_input, p1_board, p1_ships, p1)
             if_winner(p1_board, p1)
+
+            #if someone has won the game, print a statement, end the game, and ask if they want to play again
             if if_winner(p1_board, p1) == 4:
                 while True:
                     again = input(f"Neither {p1} nor {p2} won. Would you like to play again? (y/n): ")
@@ -197,6 +204,8 @@ def main():
             row_input, col_input = get_coordinates(p2_board, p2)
             hit_or_miss(row_input, col_input, p2_board, p2_ships, p2)
             if_winner(p2_board, p2)
+
+            #if no one wins, print a statement and ask if they want to play again or not
             if if_winner(p2_board, p2) == 4:
                 while True:
                     again = input(f"Neither {p1} nor {p2} won. Would you like to play again? (y/n): ")
@@ -209,11 +218,13 @@ def main():
             print(f"{p2}, you have {10 - tries} tries left!")
 
         else:
+            #if user would like to play again or not
             while True:
                 again = input(f"Neither {p1} nor {p2} won. Would you like to play again? (y/n): ")
                 if again == "y":
                     break
                 elif again == "n":
+                    print("Thanks for playing!")
                     exit()
                 else:
                     print("Invalid input - please try again.")
