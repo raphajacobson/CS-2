@@ -34,12 +34,12 @@ def def_ships(ships_board):
         row_choice = random.choice(row)                                                                 
         col_choice = random.choice(col)
         spot = f'{row_choice},{col_choice}'
-        if ships_board[row_choice][col_choice] in ships:
-            continue
-        else:
+        if spot not in ships:                                               #makes sure ship coordinates are not repeated
             ships.append(spot)
             ships_board[row_choice][col_choice] = " S "   
             tries += 1
+        else:
+            continue
     return ships_board
 
 def show_board(board, player):  
@@ -187,36 +187,35 @@ def main():
             #Plays game 10 times for each player
             row_input, col_input = get_coordinates(p1_board, p1)
             hit_or_miss(row_input, col_input, p1_board, p1_ships, p1)
-            if_winner(p1_board, p1)
 
             #if someone has won the game, print a statement, end the game, and ask if they want to play again
             if if_winner(p1_board, p1) == 4:
                 while True:
-                    again = input(f"Neither {p1} nor {p2} won. Would you like to play again? (y/n): ")
+                    again = input(f"The game is over!. Would you like to play again? (y/n): ")
                     if again == "y":
                         break
                     elif again == "n":
                         exit()
                     else:
                         print("Invalid input - please try again.")
+                break
             tries += 1
             print(f"{p1}, you have {10 - tries} tries left!")
             row_input, col_input = get_coordinates(p2_board, p2)
             hit_or_miss(row_input, col_input, p2_board, p2_ships, p2)
-            if_winner(p2_board, p2)
 
             #if no one wins, print a statement and ask if they want to play again or not
             if if_winner(p2_board, p2) == 4:
                 while True:
-                    again = input(f"Neither {p1} nor {p2} won. Would you like to play again? (y/n): ")
+                    again = input(f"The game is over!. Would you like to play again? (y/n): ")
                     if again == "y":
                         break
                     elif again == "n":
                         exit()
                     else:
                         print("Invalid input - please try again.")
+                break
             print(f"{p2}, you have {10 - tries} tries left!")
-
         else:
             #if user would like to play again or not
             while True:
