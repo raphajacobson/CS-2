@@ -2,7 +2,7 @@
 Author: Rapha Jacobson
 Description: Preforms 7 different actions (involving numbers) through recursive functions
 Bonuses: gdp function
-Bugs: In fibonacci's sequence, if you enter a number over 35, it will severely lag
+Bugs: in fibonacci's sequence, if you enter a number over 35, it will severely lag
 Log: 1.0
 '''
 
