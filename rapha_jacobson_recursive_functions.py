@@ -9,7 +9,7 @@ Log: 1.0
 
 def factorial(n):
     '''
-    calculate the factorial of a number
+    Description: calculate the factorial of a number
     Args:
         n - number inputted by user
     returns:
@@ -21,7 +21,7 @@ def factorial(n):
 
 def summation(n):
     '''
-    Calculate the summation of a number
+    Description: Calculate the summation of a number
     Args:
         n - number inputted by user
     returns:
@@ -33,7 +33,7 @@ def summation(n):
 
 def powers(a, n):
     '''
-    find the sum of any number to any power
+    Description: find the sum of any number to any power
     Args:
         a - base inputted by user
         n - power inputted by user
@@ -46,7 +46,7 @@ def powers(a, n):
 
 def sum_of_a_numbers_digits(n):
     '''
-    find the sum of a number's digits
+    Description: find the sum of a number's digits
     Args:
         n - number inputted by user
     returns:
@@ -58,7 +58,7 @@ def sum_of_a_numbers_digits(n):
 
 def fibonacci(n):
     '''
-    calculate a number in  fibonacci's sequence
+    Description: calculate a number in  fibonacci's sequence
     Args:
         n - number inputted by user
     returns:
@@ -73,7 +73,7 @@ def fibonacci(n):
 
 def gcd(x, y):
     '''
-    find the greatest common denominator of any 2 numbers
+    Description: find the greatest common denominator of any 2 numbers
     Args:
         x - number inputted by user
         y - number inputted by user
@@ -86,7 +86,7 @@ def gcd(x, y):
    
 def product_of_2_numbers(a, b):
     '''
-    find the product of any 2 numbers
+    Description: find the product of any 2 numbers
     Args:
         a - number inputted by user
         b - number inputted by user
@@ -97,7 +97,6 @@ def product_of_2_numbers(a, b):
         return 0
     if b > 0:
         return a + product_of_2_numbers(a, b-1)
-
 
 def main():
     while True:
