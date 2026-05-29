@@ -1,0 +1,52 @@
+import os
+from flask import Flask, render_template, request    # From module flask import class Flask
+app = Flask(__name__)    # Construct an instance of Flask class for our webapp
+
+
+@app.route("/")
+def index():
+    hyperlink = f'<a href="http://127.0.0.1:5000/display_form">here</a>'
+    return(f"Welcome to your 2026 recap form. Click {hyperlink} to access the form.")
+
+
+@app.route("/display_form")
+def display_form():
+    return render_template("rapha_jacobson_form_2.html")
+
+@app.route('/school-year-recap')   # URL '/' to be handled by main() route handler
+def school_year_favorites():
+    #define variable for each survey question
+    name = request.args.get('name')
+    grade = request.args.get('grade')
+    subject = request.args.get('subject')
+    challenging = request.args.get('challenging')
+    proudest = request.args.get('proudest')
+    memory = request.args.get('memory')
+
+    #print each response into the terminal
+    print(f"Name: {name}")
+    print(f"Grade: {grade}")
+    print(f"Favorite subject = {subject}")
+    print(f"Challenging moment = {challenging}")
+    print(f"Proudest moment = {proudest}")
+    print(f"Best memory: {memory}")
+
+    file_exists = os.path.exists("schoolyearrecap.csv") and os.path.getsize("schoolyearrecap.csv") > 0 #see if file already created or if it has been created and is just empty
+
+    try:          
+        with open('schoolyearrecap.csv', 'a') as output:                                             #Create a new file and write into it (maker recognizable by "output")
+            #write to schoolyearrecap.csv
+            if not file_exists:     #if file doesn't exist
+                output.write("name, grade, fav subject, most challenging moment, proudest moment, best memory\n")             #make headers
+            
+            output.write(f"{name}, {grade}, {subject}, {challenging}, {proudest}, {memory}\n")            #print outputs in csv         
+    except FileNotFoundError:       # Handle the error or log it
+        print(f"Error: schoolyearrecap.csv not found")
+        return "File error"
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+
+    return "Your 2026 recap responses have been saved"  
+
+if __name__ == '__main__':  # Script executed directly?
+    app.run(debug=True)  # Launch built-in web server and run this Flask webapp
