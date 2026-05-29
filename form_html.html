@@ -2,70 +2,277 @@
 <html>
 <head>
 <title>2026 School Year Recap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: linear-gradient(135deg, #fdf4ff 0%, #eff6ff 50%, #f0fdf4 100%);
+    min-height: 100vh;
+    padding: 2.5rem 1rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .sv-card {
+    background: #fff;
+    max-width: 600px;
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 32px rgba(120, 80, 200, 0.10);
+    align-self: flex-start;
+  }
+
+  .sv-banner {
+    background: linear-gradient(120deg, #a78bfa, #60a5fa, #34d399);
+    padding: 2.2rem 2.5rem 2rem;
+    position: relative;
+  }
+
+  .sv-banner::after {
+    content: '🎓';
+    position: absolute;
+    right: 2rem;
+    bottom: 1rem;
+    font-size: 48px;
+    opacity: 0.35;
+  }
+
+  .sv-banner .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 6px;
+  }
+
+  .sv-banner h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 30px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .sv-form {
+    padding: 2rem 2.5rem 2.5rem;
+  }
+
+  .sv-section-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #a78bfa;
+    margin-bottom: 1.25rem;
+  }
+
+  .sv-section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, #e9d5ff, transparent);
+  }
+
+  .sv-section-label.green {
+    color: #34d399;
+  }
+
+  .sv-section-label.green::after {
+    background: linear-gradient(90deg, #a7f3d0, transparent);
+  }
+
+  .sv-field {
+    margin-bottom: 1.25rem;
+  }
+
+  .sv-field label {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #4b3f6e;
+    margin-bottom: 6px;
+  }
+
+  .sv-field label.green {
+    color: #065f46;
+  }
+
+  .sv-field input[type="text"],
+  .sv-field select {
+    width: 100%;
+    height: 42px;
+    padding: 0 14px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14.5px;
+    color: #1e1b2e;
+    background: #faf5ff;
+    border: 1.5px solid #e9d5ff;
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .sv-field input[type="text"].green,
+  .sv-field select.green {
+    background: #f0fdf9;
+    border-color: #a7f3d0;
+  }
+
+  .sv-field input[type="text"]:focus,
+  .sv-field select:focus {
+    border-color: #a78bfa;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.18);
+  }
+
+  .sv-field input[type="text"].green:focus,
+  .sv-field select.green:focus {
+    border-color: #34d399;
+    box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.15);
+  }
+
+  .sv-select-wrap {
+    position: relative;
+  }
+
+  .sv-select-wrap::after {
+    content: '';
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #a78bfa;
+    pointer-events: none;
+  }
+
+  .sv-select-wrap select {
+    padding-right: 36px;
+    cursor: pointer;
+  }
+
+  .sv-divider {
+    height: 1px;
+    background: linear-gradient(90deg, #e9d5ff, #bae6fd, #bbf7d0);
+    margin: 1.75rem 0;
+  }
+
+  .sv-submit {
+    margin-top: 1.75rem;
+    width: 100%;
+    height: 48px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(120deg, #a78bfa, #60a5fa);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: opacity 0.15s, transform 0.1s;
+  }
+
+  .sv-submit:hover {
+    opacity: 0.88;
+  }
+
+  .sv-submit:active {
+    transform: scale(0.98);
+  }
+</style>
 </head>
 <body>
 
+<div class="sv-card">
 
- 
-<h1>2026 School Year Recap</h1>
+  <div class="sv-banner">
+    <p class="eyebrow">End of year</p>
+    <h1>2026 School Year Recap</h1>
+  </div>
 
-  
+  <div class="sv-form">
+    <form action="/school-year-recap" method="get">
 
+      <p class="sv-section-label">About you</p>
 
-<form action="/school-year-recap">
+      <div class="sv-field">
+        <label for="fname">What is your name?</label>
+        <input type="text" id="fname" name="name" value="">
+      </div>
 
-    <label for="grade">What grade were you in this year?</label>
-     <br>
-    <select id="grade" name="frade">
-        <option value="9th">9th</option>
-        <option value="10th">10th</option>
-        <option value="11th">11th</option>
-        <option value="12th">12th</option>
-   </select>
-   <br>
-   <br>
+      <div class="sv-field">
+        <label for="grade">What grade were you in this year?</label>
+        <div class="sv-select-wrap">
+          <select id="grade" name="grade">
+            <option value="9th">9th</option>
+            <option value="10th">10th</option>
+            <option value="11th">11th</option>
+            <option value="12th">12th</option>
+          </select>
+        </div>
+      </div>
 
+      <div class="sv-field">
+        <label for="subject">What was your favorite subject this year?</label>
+        <div class="sv-select-wrap">
+          <select id="subject" name="subject">
+            <option value="History">History</option>
+            <option value="English">English</option>
+            <option value="Math">Math</option>
+            <option value="Science">Science</option>
+            <option value="Computer science">Computer science</option>
+            <option value="Seminar">Seminar</option>
+            <option value="Language">Language (e.g. Spanish)</option>
+            <option value="Elective">Elective</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
 
-  <label for="fname">What was your favorite subject this year?</label><br>
-  <select id="grade" name="frade">
-        <option value="History">History</option>
-        <option value="English">English</option>
-        <option value="Math">Math</option>
-        <option value="Science">Science</option>
-        <option value="Computer science">Computer science</option>
-        <option value="Seminar">Seminar</option>
-        <option value="Language">Language (e.x. spanish)</option>
-        <option value="Science">Science</option>
-        <option value="Elective">Elective</option>
-        <option value="Other">Other</option>    <!-- can I ask another question if this is picked? -->
-   </select>
-  <br>
-  <br>
+      <div class="sv-divider"></div>
 
+      <p class="sv-section-label green">Your year in review</p>
 
-  <label for="fname">What was your most challenging moment?</label>
-  <br>
-  <input type="text" id="fname" name="fname" value="Enter here">
-  <br>
-  <br>
+      <div class="sv-field">
+        <label for="challenging" class="green">What was your most challenging moment?</label>
+        <input type="text" id="challenging" name="challenging" value="" class="green">
+      </div>
 
-  <label for="fname">What was your proudest moment?</label>
-  <br>
-  <input type="text" id="fname" name="fname" value="Enter here">
-  <br>
-  <br>
+      <div class="sv-field">
+        <label for="proudest" class="green">What was your proudest moment?</label>
+        <input type="text" id="proudest" name="proudest" value="" class="green">
+      </div>
 
-  <label for="fname">What was your best memory?</label>
-  <br>
-  <input type="text" id="fname" name="fname" value="Enter here">
-  <br>
-  <br>
- 
+      <div class="sv-field">
+        <label for="memory" class="green">What was your best memory?</label>
+        <input type="text" id="memory" name="memory" value="" class="green">
+      </div>
 
-  <input type="submit">
-</form> 
+      <button type="submit" class="sv-submit">Submit ✦</button>
 
+    </form>
+  </div>
 
+</div>
 
 </body>
 </html>
