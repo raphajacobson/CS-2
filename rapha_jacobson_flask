@@ -35,7 +35,6 @@ def school_year_favorites():
 
     try:          
         with open('schoolyearrecap.csv', 'a') as output:                                             #Create a new file and write into it (maker recognizable by "output")
-            print("38")
             #write to schoolyearrecap.csv
             if not file_exists:     #if file doesn't exist
                 output.write("name, grade, fav subject, most challenging moment, proudest moment, best memory\n")             #make headers
